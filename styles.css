@@ -20,13 +20,13 @@ em { color: var(--coral); font-style: normal; }
 
 .site-header { position: sticky; top: 0; z-index: 20; min-height: 72px; padding: 0 max(24px, calc((100vw - 1260px) / 2)); display: flex; align-items: center; justify-content: space-between; background: rgba(242, 239, 230, .92); border-bottom: 1px solid var(--line); backdrop-filter: blur(14px); }
 .brand { display: inline-flex; align-items: center; gap: 12px; font: 600 18px var(--mono); letter-spacing: -.02em; }
-.brand-mark { position: relative; width: 25px; height: 25px; display: inline-block; }
-.brand-mark i { position: absolute; width: 9px; height: 9px; background: var(--ink); border-radius: 50%; }
-.brand-mark i:nth-child(1) { left: 0; top: 8px; }
-.brand-mark i:nth-child(2) { right: 0; top: 0; background: var(--coral); }
-.brand-mark i:nth-child(3) { right: 0; bottom: 0; background: var(--mint-strong); }
-.brand-mark::before, .brand-mark::after { content: ""; position: absolute; height: 1px; width: 13px; left: 6px; top: 9px; background: var(--ink); transform-origin: left; transform: rotate(-35deg); }
-.brand-mark::after { top: 15px; transform: rotate(35deg); }
+.brand-mark { position: relative; width: 28px; height: 28px; display: inline-block; --mark-cyan: #54c7c4; --mark-magenta: #c86491; --mark-yellow: #d7b958; --mark-line: #5e7481; }
+.brand-mark i { position: absolute; z-index: 1; display: block; width: 10px; height: 10px; }
+.brand-mark i:nth-child(1) { left: 0; top: 9px; border-radius: 50%; background: var(--mark-cyan); }
+.brand-mark i:nth-child(2) { right: 0; top: 0; background: var(--mark-magenta); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.brand-mark i:nth-child(3) { right: 0; bottom: 0; border-radius: 1px; background: var(--mark-yellow); }
+.brand-mark::before, .brand-mark::after { content: ""; position: absolute; z-index: 0; width: 17px; height: 2px; left: 6px; top: 13px; border-radius: 2px; background: var(--mark-line); transform-origin: left center; transform: rotate(-29deg); }
+.brand-mark::after { top: 14px; transform: rotate(29deg); }
 nav { display: flex; align-items: center; gap: 32px; font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .06em; }
 nav a:hover { color: var(--coral); }
 .nav-cta { padding: 9px 15px; color: var(--paper); background: var(--ink); }
