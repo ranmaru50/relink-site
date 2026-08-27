@@ -22,6 +22,7 @@
       <nav id="site-nav" aria-label="メインナビゲーション">
         <a href="#concept">Concept</a>
         <a href="#architecture">Architecture</a>
+        <a href="#use-cases">Use cases</a>
         <a href="#roadmap">Roadmap</a>
         <a class="nav-cta" href="https://github.com/ranmaru50" rel="noreferrer">GitHub ↗</a>
       </nav>
@@ -111,8 +112,69 @@
         </ol>
       </section>
 
+
+      <section id="use-cases" class="use-cases section-shell">
+        <div class="section-index">04 / USE CASES</div>
+        <div class="use-cases-head">
+          <div>
+            <p class="kicker">FROM LINK TO ACTION</p>
+            <h2>現場ごとに違うモノを、<br />同じ流れで扱う。</h2>
+          </div>
+          <p>RELinkが共通化するのは製品固有の操作ではなく、対象を見つけ、能力を理解し、条件を確かめて実行するまでの流れです。</p>
+        </div>
+
+        <div class="use-case-list">
+          <article class="use-case featured">
+            <div class="use-case-meta"><span>UC / 01</span><b>PUBLIC EQUIPMENT</b></div>
+            <div class="use-case-title">
+              <span class="use-case-icon" aria-hidden="true">◎</span>
+              <div><small>TOUCH TO USE</small><h3>その場の設備を<br />すぐに操作する</h3></div>
+            </div>
+            <p>利用者が共有設備のQRやNFCに触れると、その機器専用アプリを探さなくても、現在利用できる操作と必要条件を確認できます。</p>
+            <div class="use-case-flow" aria-label="QRまたはNFCから設備操作まで">
+              <span>QR / NFC</span><i>→</i><span>Resolve</span><i>→</i><span>Available actions</span><i>→</i><strong>Operate</strong>
+            </div>
+            <ul><li>会議室設備</li><li>充電器</li><li>シェア機器</li></ul>
+          </article>
+
+          <article class="use-case">
+            <div class="use-case-meta"><span>UC / 02</span><b>FIELD SERVICE</b></div>
+            <div class="use-case-title">
+              <span class="use-case-icon" aria-hidden="true">△</span>
+              <div><small>IDENTIFY &amp; INSPECT</small><h3>保守対象を特定し、<br />診断を実行する</h3></div>
+            </div>
+            <p>保守担当者は現物のAnchorから正しいEntityへ到達し、モデルや設置場所を推測せずに、その個体が公開する診断Capabilityを呼び出せます。</p>
+            <div class="use-case-flow"><span>Asset ID</span><i>→</i><span>Entity</span><i>→</i><strong>Diagnostics</strong></div>
+            <ul><li>設備保全</li><li>点検</li><li>遠隔支援</li></ul>
+          </article>
+
+          <article class="use-case">
+            <div class="use-case-meta"><span>UC / 03</span><b>ROBOTICS</b></div>
+            <div class="use-case-title">
+              <span class="use-case-icon" aria-hidden="true">◇</span>
+              <div><small>MULTI-VENDOR CONTROL</small><h3>異なるロボットの<br />能力を発見する</h3></div>
+            </div>
+            <p>制御側はベンダーごとのAPI名ではなく、移動・把持・計測などの意味的なCapabilityを発見し、対応するHTTPやROS Bindingを選択できます。</p>
+            <div class="use-case-flow"><span>Discover</span><i>→</i><span>Choose binding</span><i>→</i><strong>Invoke</strong></div>
+            <ul><li>搬送</li><li>協働ロボット</li><li>研究開発</li></ul>
+          </article>
+
+          <article class="use-case">
+            <div class="use-case-meta"><span>UC / 04</span><b>AI AGENTS</b></div>
+            <div class="use-case-title">
+              <span class="use-case-icon" aria-hidden="true">✣</span>
+              <div><small>SEMANTIC ACTION</small><h3>Agentが能力と条件を<br />理解して実行する</h3></div>
+            </div>
+            <p>AI Agentは機器固有の事前統合なしに、入力・出力・要件を機械的に読み取り、Runtimeの安全な評価を経てCapabilityを選択できます。</p>
+            <div class="use-case-flow"><span>Inspect</span><i>→</i><span>Evaluate</span><i>→</i><strong>Act</strong></div>
+            <ul><li>オートメーション</li><li>MCP Binding</li><li>自律エージェント</li></ul>
+          </article>
+        </div>
+        <p class="use-case-note"><span>COMMON MODEL</span> 同じAR-XML semanticsを、Web・Python・Kotlinなど複数のRuntimeから利用することを目指します。</p>
+      </section>
+
       <section id="roadmap" class="roadmap section-shell">
-        <div class="section-index light">04 / ROADMAP</div>
+        <div class="section-index light">05 / ROADMAP</div>
         <div class="roadmap-head"><div><p class="kicker coral">BUILD ORDER</p><h2>Architecture proof<br />への道筋。</h2></div><p>最初の目標は、Physical Entityから複数RuntimeによるCapability実行までを、共通のConformance Suiteで実証することです。</p></div>
         <div class="milestones">
           <article class="milestone active"><span class="status">NOW</span><div class="milestone-id">M1</div><h3>Runtime Baseline</h3><p>Web RuntimeがDraft 4を安定して解釈し、HTTP Capabilityを実行できる。</p><ul><li>Parser / Validation</li><li>URL Resolution</li><li>Result Mapping</li></ul></article>
