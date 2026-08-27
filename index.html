@@ -139,7 +139,7 @@
   &lt;capabilities&gt;
     &lt;capability
       id="<span class="code-value">temperature</span>"
-      type="<span class="code-value">…/temperature/read/1</span>"&gt;
+      type="<span class="code-value">https://example.org/capabilities/temperature/read/1</span>"&gt;
 
       &lt;result&gt;
         &lt;outputs&gt;
@@ -157,7 +157,8 @@
   &lt;/capabilities&gt;
 <span class="code-muted">&lt;/ar-entity&gt;</span></code></pre>
           <dl class="contract-summary">
-            <div><dt>WHAT</dt><dd><strong>temperature.read</strong><span>温度を読み取るCapability</span></dd></div>
+            <div><dt>LOCAL ID</dt><dd><strong>temperature</strong><span>文書内でCapabilityを参照する短い識別子</span></dd></div>
+            <div class="semantic-id"><dt>SEMANTIC CAPABILITY ID</dt><dd><code>https://example.org/capabilities/<wbr>temperature/read/1</code><span>Capabilityの意味を示すグローバルなtype</span></dd></div>
             <div><dt>RETURNS</dt><dd><strong>number</strong><span>temperatureというOutput</span></dd></div>
             <div><dt>HOW</dt><dd><strong>HTTP GET</strong><span>/api/temperatureを呼び出すInterface</span></dd></div>
             <div class="contract-principle"><dt>PRINCIPLE</dt><dd>Capability <b>≠</b> Interface</dd></div>
@@ -168,13 +169,39 @@
 
       <section class="journey section-shell">
         <div class="section-index">04 / ONE JOURNEY</div>
-        <div class="journey-head"><h2>ひとつのAnchorから、<br />ひとつのActionまで。</h2><p>RELinkの最小の体験は、現実世界の対象に触れ、能力を理解し、実行するまでの連続した流れです。</p></div>
-        <ol class="steps">
-          <li><span>01</span><strong>Touch</strong><p>QR・NFC・URL・IDから、エンティティへの手がかりを得る。</p></li>
-          <li><span>02</span><strong>Resolve</strong><p>Resolverが永続的なidentityと最新の文書位置を返す。</p></li>
-          <li><span>03</span><strong>Discover</strong><p>RuntimeがAR-XMLを読み、利用可能なCapabilityを公開する。</p></li>
-          <li><span>04</span><strong>Invoke</strong><p>要件を評価し、選択したInterfaceから実際の処理を呼び出す。</p></li>
-        </ol>
+        <div class="journey-head">
+          <div><p class="kicker">CURRENT &amp; TARGET</p><h2>現在の最小フローと、<br />目指す全体フロー。</h2></div>
+          <p>Web Runtimeで試せる現在のBaselineと、Resolver導入後にPhysical Anchorから始まるTarget Architectureを分けて示します。</p>
+        </div>
+        <div class="journey-modes">
+          <article class="journey-mode current">
+            <div class="journey-mode-head">
+              <div><span>01 / CURRENT BASELINE</span><h3>AR-XML URLから実行する</h3></div>
+              <mark>EXPERIMENTAL PoC</mark>
+            </div>
+            <p>現在のWeb Runtimeが実装している最小経路。既知のAR-XML URLを読み込み、Capabilityを発見してHTTP Interfaceを呼び出します。</p>
+            <div class="journey-flow" aria-label="現在のBaseline">
+              <span><small>INPUT</small>AR-XML URL</span><i>→</i>
+              <span><small>EXECUTE</small>Web Runtime</span><i>→</i>
+              <strong><small>RESULT</small>Capability</strong>
+            </div>
+          </article>
+          <article class="journey-mode target">
+            <div class="journey-mode-head">
+              <div><span>02 / TARGET ARCHITECTURE</span><h3>Physical Anchorから解決する</h3></div>
+              <mark>RESOLVER PLANNED</mark>
+            </div>
+            <p>Resolver導入後の想定フロー。QRやNFCなどのAnchorから永続的なEntity identityと現在のAR-XML locationを解決します。</p>
+            <div class="journey-flow" aria-label="Resolver導入後のTarget Architecture">
+              <span><small>TOUCH</small>Anchor</span><i>→</i>
+              <span class="planned-step"><small>RESOLVE</small>Resolver</span><i>→</i>
+              <span><small>LOAD</small>AR-XML</span><i>→</i>
+              <span><small>EXECUTE</small>Runtime</span><i>→</i>
+              <strong><small>RESULT</small>Capability</strong>
+            </div>
+          </article>
+        </div>
+        <p class="journey-note"><span>BOUNDARY</span> ResolverはTarget Architectureの構成要素であり、現在のWeb Runtime Baselineには含まれません。</p>
       </section>
 
 
