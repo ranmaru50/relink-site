@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="RELinkは、現実世界のエンティティをWeb上の能力として発見・理解・実行可能にするためのオープンなアーキテクチャです。" />
+    <meta name="theme-color" content="#071b2b" />
+    <title>RELink — Real Entity Link</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="RELink ホーム">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>RELink</span>
+      </a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" aria-label="メインナビゲーション">
+        <a href="#concept">Concept</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#roadmap">Roadmap</a>
+        <a class="nav-cta" href="https://github.com/ranmaru50" rel="noreferrer">GitHub ↗</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero section-shell">
+        <div class="eyebrow"><span>OPEN ARCHITECTURE</span><span>Draft 0.1</span></div>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="kicker">Real Entity Link</p>
+            <h1>現実世界を、<br /><em>理解できるWeb</em>へ。</h1>
+            <p class="lead">RELinkは、モノや設備、ロボットなどの現実のエンティティを、発見・理解・実行可能な能力としてWebへ接続するためのオープンなアーキテクチャです。</p>
+            <div class="hero-actions">
+              <a class="button primary" href="#architecture">仕組みを見る <span>↓</span></a>
+              <a class="button secondary" href="https://github.com/ranmaru50/relink-site" rel="noreferrer">View source ↗</a>
+            </div>
+          </div>
+
+          <div class="system-map" aria-label="RELinkの処理フロー">
+            <div class="map-label">SYSTEM / 01</div>
+            <div class="map-track" aria-hidden="true"><span></span></div>
+            <div class="map-node node-source">
+              <small>PHYSICAL</small>
+              <strong>Entity</strong>
+              <span>QR · NFC · URL · ID</span>
+            </div>
+            <div class="map-node node-resolver">
+              <small>IDENTITY</small>
+              <strong>Resolver</strong>
+              <span>Identity → Location</span>
+            </div>
+            <div class="map-node node-runtime">
+              <small>SEMANTICS</small>
+              <strong>Runtime</strong>
+              <span>Discover · Evaluate · Invoke</span>
+            </div>
+            <div class="map-node node-capability">
+              <small>ACTION</small>
+              <strong>Capability</strong>
+              <span>HTTP · Native · Extensions</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-footnote"><span>01</span><p>Entity identity and document location are deliberately separate.</p></div>
+      </section>
+
+      <section id="concept" class="manifesto section-shell">
+        <div class="section-index">01 / CONCEPT</div>
+        <div class="manifesto-grid">
+          <h2>リンクするのは、<br />ページではなく<em>能力</em>です。</h2>
+          <div class="manifesto-copy">
+            <p>今日のWebは「モノについてのページ」へリンクできます。しかし、そのモノが今何をできるか、どう呼び出すか、何が必要かまでは共通の方法で表現できません。</p>
+            <p>RELinkは、エンティティの意味と実行インターフェースを分離しながら結びます。アプリやエージェントは専用連携を知らなくても、能力を発見して適切な方法で実行できます。</p>
+          </div>
+        </div>
+        <div class="principle-grid">
+          <article><span>01</span><h3>Entity ≠ Location</h3><p>存在そのものの識別子と、現在の文書URLを分離します。</p></article>
+          <article><span>02</span><h3>Capability ≠ Interface</h3><p>「何ができるか」と「どう実行するか」を別の層として扱います。</p></article>
+          <article><span>03</span><h3>Semantics before Platform</h3><p>ブラウザ、ロボット、モバイルを越えて意味を共有します。</p></article>
+        </div>
+      </section>
+
+      <section id="architecture" class="architecture section-shell">
+        <div class="section-index light">02 / ARCHITECTURE</div>
+        <div class="architecture-head">
+          <div><p class="kicker mint">HOW IT WORKS</p><h2>小さな部品を、<br />明確な責務でつなぐ。</h2></div>
+          <p>RELinkは単一の巨大なサービスではありません。文書、実行環境、名前解決、試験基盤を独立させることで、特定ベンダーやプラットフォームに依存しない実装を目指します。</p>
+        </div>
+
+        <div class="architecture-stack">
+          <article class="layer arxml"><span class="layer-no">A</span><div><small>DESCRIPTION</small><h3>AR-XML</h3></div><p>エンティティのCapability、結果、要件、実行Interfaceを記述する機械可読な契約。</p><b>Core 0.1 / Draft 4</b></article>
+          <article class="layer runtime"><span class="layer-no">B</span><div><small>EXECUTION</small><h3>Runtime</h3></div><p>AR-XMLを読み、検証し、利用可能性を評価して、適切なInterfaceを呼び出す。</p><b>Web → Python → Kotlin</b></article>
+          <article class="layer resolver"><span class="layer-no">C</span><div><small>RESOLUTION</small><h3>Resolver</h3></div><p>物理Anchorや永続IDを、現在のEntity identityとAR-XML locationへ解決する。</p><b>Identity → Location</b></article>
+          <article class="layer testbed"><span class="layer-no">D</span><div><small>CONFIDENCE</small><h3>Testbed</h3></div><p>共通fixtureとHTTP scenarioで、複数Runtimeが同じ意味を実装することを検証する。</p><b>Conformance</b></article>
+        </div>
+      </section>
+
+      <section class="journey section-shell">
+        <div class="section-index">03 / ONE JOURNEY</div>
+        <div class="journey-head"><h2>ひとつのAnchorから、<br />ひとつのActionまで。</h2><p>RELinkの最小の体験は、現実世界の対象に触れ、能力を理解し、実行するまでの連続した流れです。</p></div>
+        <ol class="steps">
+          <li><span>01</span><strong>Touch</strong><p>QR・NFC・URL・IDから、エンティティへの手がかりを得る。</p></li>
+          <li><span>02</span><strong>Resolve</strong><p>Resolverが永続的なidentityと最新の文書位置を返す。</p></li>
+          <li><span>03</span><strong>Discover</strong><p>RuntimeがAR-XMLを読み、利用可能なCapabilityを公開する。</p></li>
+          <li><span>04</span><strong>Invoke</strong><p>要件を評価し、選択したInterfaceから実際の処理を呼び出す。</p></li>
+        </ol>
+      </section>
+
+      <section id="roadmap" class="roadmap section-shell">
+        <div class="section-index light">04 / ROADMAP</div>
+        <div class="roadmap-head"><div><p class="kicker coral">BUILD ORDER</p><h2>Architecture proof<br />への道筋。</h2></div><p>最初の目標は、Physical Entityから複数RuntimeによるCapability実行までを、共通のConformance Suiteで実証することです。</p></div>
+        <div class="milestones">
+          <article class="milestone active"><span class="status">NOW</span><div class="milestone-id">M1</div><h3>Runtime Baseline</h3><p>Web RuntimeがDraft 4を安定して解釈し、HTTP Capabilityを実行できる。</p><ul><li>Parser / Validation</li><li>URL Resolution</li><li>Result Mapping</li></ul></article>
+          <article class="milestone active"><span class="status">NOW</span><div class="milestone-id">M2</div><h3>Conformance Baseline</h3><p>独立したTestbedがWeb Runtimeを実際のE2Eケースで自動検証する。</p><ul><li>Draft 4 Fixtures</li><li>Executable Cases</li><li>Normalized Results</li></ul></article>
+          <article class="milestone"><span class="status">NEXT</span><div class="milestone-id">M3</div><h3>Entity Resolution</h3><p>AnchorからResolverを経て、EntityとAR-XMLへ到達する一連の流れを作る。</p><ul><li>Resolver MVP</li><li>Lifecycle</li><li>Resolver Testbed</li></ul></article>
+          <article class="milestone"><span class="status">THEN</span><div class="milestone-id">M4</div><h3>Second Runtime</h3><p>PythonまたはKotlinが同じケースを通り、Platform independenceを示す。</p><ul><li>Shared Semantics</li><li>Runtime Adapter</li><li>Cross-platform Proof</li></ul></article>
+        </div>
+      </section>
+
+      <section class="open-section section-shell">
+        <div class="open-panel">
+          <p class="kicker">OPEN BY DESIGN</p>
+          <h2>現実とWebの間に、<br />共通言語を。</h2>
+          <p>RELinkはまだ設計と実装の途中です。仕様、Runtime、Testbedを公開し、ひとつずつ検証可能な形で積み上げています。</p>
+          <div class="repo-links">
+            <a href="https://github.com/ranmaru50/relink-web-runtime" rel="noreferrer"><span>relink-web-runtime</span><b>TypeScript ↗</b></a>
+            <a href="https://github.com/ranmaru50/relink-testbed" rel="noreferrer"><span>relink-testbed</span><b>Conformance ↗</b></a>
+            <a href="https://github.com/ranmaru50/relink-site" rel="noreferrer"><span>relink-site</span><b>This site ↗</b></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>RELink</span></a>
+      <p>Real Entity Link — Bringing real-world entities into the Web.</p>
+      <a href="#top">Back to top ↑</a>
+    </footer>
+  </body>
+</html>
