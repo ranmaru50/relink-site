@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="RELinkは、現実世界のエンティティをWeb上の能力として発見・理解・実行可能にするためのオープンなアーキテクチャです。" />
     <meta name="theme-color" content="#071b2b" />
+    <link rel="canonical" href="https://ranmaru50.github.io/relink-site/" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RELink" />
+    <meta property="og:title" content="RELink — Real Entity Link" />
+    <meta property="og:description" content="現実世界のエンティティを、発見・理解・実行可能な能力としてWebへ接続するオープンアーキテクチャ。" />
+    <meta property="og:url" content="https://ranmaru50.github.io/relink-site/" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="RELink — Real Entity Link" />
+    <meta name="twitter:description" content="現実世界を、理解できるWebへ。" />
     <title>RELink — Real Entity Link</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -36,9 +46,10 @@
             <p class="kicker">Real Entity Link</p>
             <h1>現実世界を、<br /><em>理解できるWeb</em>へ。</h1>
             <p class="lead">RELinkは、モノや設備、ロボットなどの現実のエンティティを、発見・理解・実行可能な能力としてWebへ接続するためのオープンなアーキテクチャです。</p>
+            <p class="lead-detail">QRやNFCなどから対象を識別し、機械可読なCapabilityを取得して、WebやネイティブRuntimeから利用します。</p>
             <div class="hero-actions">
-              <a class="button primary" href="#architecture">仕組みを見る <span>↓</span></a>
-              <a class="button secondary" href="https://github.com/ranmaru50/relink-site" rel="noreferrer">View source ↗</a>
+              <a class="button primary" href="#arxml-example">AR-XMLを見る <span>↓</span></a>
+              <a class="button secondary" href="#projects">Explore projects ↘</a>
             </div>
           </div>
 
@@ -54,20 +65,23 @@
               <small>IDENTITY</small>
               <strong>Resolver</strong>
               <span>Identity → Location</span>
+              <mark class="node-status planned">PLANNED</mark>
             </div>
             <div class="map-node node-runtime">
               <small>SEMANTICS</small>
               <strong>Runtime</strong>
               <span>Discover · Evaluate · Invoke</span>
+              <mark class="node-status experimental">EXPERIMENTAL</mark>
             </div>
             <div class="map-node node-capability">
               <small>ACTION</small>
               <strong>Capability</strong>
               <span>HTTP · Native · Extensions</span>
+              <mark class="node-status experimental">DRAFT</mark>
             </div>
           </div>
         </div>
-        <div class="hero-footnote"><span>01</span><p>Entity identity and document location are deliberately separate.</p></div>
+        <div class="hero-footnote"><span>STATUS</span><p>Working code and future architecture are labeled separately throughout this site.</p></div>
       </section>
 
       <section id="concept" class="manifesto section-shell">
@@ -90,19 +104,70 @@
         <div class="section-index light">02 / ARCHITECTURE</div>
         <div class="architecture-head">
           <div><p class="kicker mint">HOW IT WORKS</p><h2>小さな部品を、<br />明確な責務でつなぐ。</h2></div>
-          <p>RELinkは単一の巨大なサービスではありません。文書、実行環境、名前解決、試験基盤を独立させることで、特定ベンダーやプラットフォームに依存しない実装を目指します。</p>
+          <p>RELinkは単一の巨大なサービスではありません。文書、実行環境、名前解決、試験基盤、Trustを独立させます。右端のstatusは、公開リポジトリで確認できる現在地です。</p>
+        </div>
+
+        <div class="architecture-legend" aria-label="開発状況の凡例">
+          <span><i class="legend-dot implemented"></i>実装が存在</span>
+          <span><i class="legend-dot development"></i>開発中</span>
+          <span><i class="legend-dot planned"></i>計画済み</span>
+          <span><i class="legend-dot future"></i>将来構想</span>
         </div>
 
         <div class="architecture-stack">
-          <article class="layer arxml"><span class="layer-no">A</span><div><small>DESCRIPTION</small><h3>AR-XML</h3></div><p>エンティティのCapability、結果、要件、実行Interfaceを記述する機械可読な契約。</p><b>Core 0.1 / Draft 4</b></article>
-          <article class="layer runtime"><span class="layer-no">B</span><div><small>EXECUTION</small><h3>Runtime</h3></div><p>AR-XMLを読み、検証し、利用可能性を評価して、適切なInterfaceを呼び出す。</p><b>Web → Python → Kotlin</b></article>
-          <article class="layer resolver"><span class="layer-no">C</span><div><small>RESOLUTION</small><h3>Resolver</h3></div><p>物理Anchorや永続IDを、現在のEntity identityとAR-XML locationへ解決する。</p><b>Identity → Location</b></article>
-          <article class="layer testbed"><span class="layer-no">D</span><div><small>CONFIDENCE</small><h3>Testbed</h3></div><p>共通fixtureとHTTP scenarioで、複数Runtimeが同じ意味を実装することを検証する。</p><b>Conformance</b></article>
+          <article class="layer arxml"><span class="layer-no">A</span><div><small>DESCRIPTION</small><h3>AR-XML</h3></div><p>Capability、結果、要件、実行Interfaceを記述する機械可読な契約。</p><b>Core 0.1 / Draft 4</b><span class="phase-badge experimental">EXPERIMENTAL</span></article>
+          <article class="layer runtime"><span class="layer-no">B</span><div><small>EXECUTION</small><h3>Web Runtime</h3></div><p>AR-XMLを読み、検証し、利用可能性を評価してHTTP Interfaceを呼び出す。</p><b>Browser PoC</b><span class="phase-badge implemented">IMPLEMENTED PoC</span></article>
+          <article class="layer testbed"><span class="layer-no">C</span><div><small>CONFIDENCE</small><h3>Testbed</h3></div><p>共通fixtureとHTTP scenarioでRuntimeの一貫した振る舞いを検証する。</p><b>Conformance baseline</b><span class="phase-badge development">IN DEVELOPMENT</span></article>
+          <article class="layer resolver"><span class="layer-no">D</span><div><small>RESOLUTION</small><h3>Resolver</h3></div><p>物理Anchorや永続IDを、現在のEntity identityとAR-XML locationへ解決する。</p><b>Identity → Location</b><span class="phase-badge planned">PLANNED</span></article>
+          <article class="layer trust"><span class="layer-no">E</span><div><small>TRUST</small><h3>Manifest / Trust</h3></div><p>文書の真正性、鍵のローテーション、所有権やlifecycleを段階的に扱う。</p><b>After Resolver</b><span class="phase-badge future">FUTURE</span></article>
         </div>
       </section>
 
+      <section id="arxml-example" class="example section-shell">
+        <div class="section-index">03 / AR-XML EXAMPLE</div>
+        <div class="example-head">
+          <div>
+            <p class="kicker">CONCRETE CONTRACT</p>
+            <h2>「何ができるか」と<br />「どう呼ぶか」を分ける。</h2>
+          </div>
+          <p>この例では、温度を読むという意味的なCapabilityを、HTTP GET Interfaceへ結び付けています。Interfaceが変わっても、Capabilityの意味は変わりません。</p>
+        </div>
+        <div class="example-grid">
+          <pre class="code-panel" aria-label="AR-XML temperature capability example"><code><span class="code-muted">&lt;ar-entity
+  xmlns="https://relink.dev/ns/arxml/core/0.1"
+  version="0.1"&gt;</span>
+  &lt;capabilities&gt;
+    &lt;capability
+      id="<span class="code-value">temperature</span>"
+      type="<span class="code-value">…/temperature/read/1</span>"&gt;
+
+      &lt;result&gt;
+        &lt;outputs&gt;
+          &lt;output name="<span class="code-value">temperature</span>"
+                  type="<span class="code-value">number</span>" /&gt;
+        &lt;/outputs&gt;
+      &lt;/result&gt;
+
+      &lt;interfaces&gt;
+        &lt;interface type="<span class="code-value">http</span>"
+                   method="<span class="code-value">GET</span>"
+                   endpoint="<span class="code-value">/api/temperature</span>" /&gt;
+      &lt;/interfaces&gt;
+    &lt;/capability&gt;
+  &lt;/capabilities&gt;
+<span class="code-muted">&lt;/ar-entity&gt;</span></code></pre>
+          <dl class="contract-summary">
+            <div><dt>WHAT</dt><dd><strong>temperature.read</strong><span>温度を読み取るCapability</span></dd></div>
+            <div><dt>RETURNS</dt><dd><strong>number</strong><span>temperatureというOutput</span></dd></div>
+            <div><dt>HOW</dt><dd><strong>HTTP GET</strong><span>/api/temperatureを呼び出すInterface</span></dd></div>
+            <div class="contract-principle"><dt>PRINCIPLE</dt><dd>Capability <b>≠</b> Interface</dd></div>
+          </dl>
+        </div>
+        <a class="text-link" href="https://github.com/ranmaru50/relink-web-runtime/blob/main/docs/specs/arxml-core-0.1-draft4.md" rel="noreferrer">Read AR-XML Core 0.1 Draft 4 <span>↗</span></a>
+      </section>
+
       <section class="journey section-shell">
-        <div class="section-index">03 / ONE JOURNEY</div>
+        <div class="section-index">04 / ONE JOURNEY</div>
         <div class="journey-head"><h2>ひとつのAnchorから、<br />ひとつのActionまで。</h2><p>RELinkの最小の体験は、現実世界の対象に触れ、能力を理解し、実行するまでの連続した流れです。</p></div>
         <ol class="steps">
           <li><span>01</span><strong>Touch</strong><p>QR・NFC・URL・IDから、エンティティへの手がかりを得る。</p></li>
@@ -114,7 +179,7 @@
 
 
       <section id="use-cases" class="use-cases section-shell">
-        <div class="section-index">04 / USE CASES</div>
+        <div class="section-index">05 / USE CASES</div>
         <div class="use-cases-head">
           <div>
             <p class="kicker">FROM LINK TO ACTION</p>
@@ -173,8 +238,24 @@
         <p class="use-case-note"><span>COMMON MODEL</span> 同じAR-XML semanticsを、Web・Python・Kotlinなど複数のRuntimeから利用することを目指します。</p>
       </section>
 
+      <section id="positioning" class="positioning section-shell">
+        <div class="section-index">06 / POSITIONING</div>
+        <div class="positioning-head">
+          <div><p class="kicker">RELATED TECHNOLOGIES</p><h2>既存のWebを置き換えず、<br />意味とIdentityを重ねる。</h2></div>
+          <p>RELinkはHTTPやWeb APIを置き換える提案ではありません。既存技術を実行手段として使いながら、Physical Entityから意味的なCapabilityまでを一続きに扱う上位アーキテクチャです。</p>
+        </div>
+        <div class="technology-list">
+          <article><span class="tech-name">HTTP / REST</span><p>通信とCapability invocationの手段。</p><b>RELinkが利用</b></article>
+          <article><span class="tech-name">OpenAPI</span><p>個々のWeb APIの操作と入出力を記述。</p><b>AR-XMLはEntity capabilityを記述</b></article>
+          <article><span class="tech-name">WoT TD</span><p>Thingのproperties・actions・eventsを記述する近接領域。</p><b>Identity / Resolver分離を検証</b></article>
+          <article><span class="tech-name">GS1 Digital Link</span><p>識別子をWeb上の情報資源へ結び付ける仕組み。</p><b>Physical Anchorで補完可能</b></article>
+          <article><span class="tech-name">MCP</span><p>AIアプリケーションとToolを接続するプロトコル。</p><b>将来の実行Binding候補</b></article>
+        </div>
+        <p class="positioning-note">この整理は現在の設計上の位置付けであり、各技術との互換性や準拠を宣言するものではありません。</p>
+      </section>
+
       <section id="roadmap" class="roadmap section-shell">
-        <div class="section-index light">05 / ROADMAP</div>
+        <div class="section-index light">07 / ROADMAP</div>
         <div class="roadmap-head"><div><p class="kicker coral">BUILD ORDER</p><h2>Architecture proof<br />への道筋。</h2></div><p>最初の目標は、Physical Entityから複数RuntimeによるCapability実行までを、共通のConformance Suiteで実証することです。</p></div>
         <div class="milestones">
           <article class="milestone active"><span class="status">NOW</span><div class="milestone-id">M1</div><h3>Runtime Baseline</h3><p>Web RuntimeがDraft 4を安定して解釈し、HTTP Capabilityを実行できる。</p><ul><li>Parser / Validation</li><li>URL Resolution</li><li>Result Mapping</li></ul></article>
@@ -184,15 +265,34 @@
         </div>
       </section>
 
-      <section class="open-section section-shell">
+      <section id="projects" class="open-section section-shell">
         <div class="open-panel">
+          <div class="section-index">08 / EXPLORE THE PROJECT</div>
           <p class="kicker">OPEN BY DESIGN</p>
-          <h2>現実とWebの間に、<br />共通言語を。</h2>
-          <p>RELinkはまだ設計と実装の途中です。仕様、Runtime、Testbedを公開し、ひとつずつ検証可能な形で積み上げています。</p>
-          <div class="repo-links">
-            <a href="https://github.com/ranmaru50/relink-web-runtime" rel="noreferrer"><span>relink-web-runtime</span><b>TypeScript ↗</b></a>
-            <a href="https://github.com/ranmaru50/relink-testbed" rel="noreferrer"><span>relink-testbed</span><b>Conformance ↗</b></a>
-            <a href="https://github.com/ranmaru50/relink-site" rel="noreferrer"><span>relink-site</span><b>This site ↗</b></a>
+          <h2>説明の次は、<br />動く実装と仕様へ。</h2>
+          <p>RELinkはまだ設計検証の途中です。公開している仕様、Runtime、Testbedから現在の到達点と課題を確認できます。</p>
+          <div class="project-grid">
+            <a class="project-card" href="https://github.com/ranmaru50/relink-web-runtime" rel="noreferrer">
+              <span class="phase-badge implemented">EXPERIMENTAL PoC</span>
+              <small>01 / EXECUTE</small>
+              <h3>Web Runtime</h3>
+              <p>AR-XML Draft 4をBrowserで解釈し、HTTP Capabilityを実行するReference PoC。</p>
+              <b>Explore repository ↗</b>
+            </a>
+            <a class="project-card" href="https://github.com/ranmaru50/relink-testbed" rel="noreferrer">
+              <span class="phase-badge development">IN DEVELOPMENT</span>
+              <small>02 / VERIFY</small>
+              <h3>Testbed</h3>
+              <p>Runtimeの意味的な一貫性と相互運用性を検証するローカル試験基盤。</p>
+              <b>Explore repository ↗</b>
+            </a>
+            <a class="project-card" href="https://github.com/ranmaru50/relink-web-runtime/blob/main/docs/specs/arxml-core-0.1-draft4.md" rel="noreferrer">
+              <span class="phase-badge experimental">DRAFT 4</span>
+              <small>03 / READ</small>
+              <h3>AR-XML Core</h3>
+              <p>Entity、Capability、Result、Requirement、Interfaceの現在の情報モデル。</p>
+              <b>Read specification ↗</b>
+            </a>
           </div>
         </div>
       </section>
