@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="RELinkは、現実世界のエンティティをWeb上の能力として発見・理解・実行可能にするためのオープンなアーキテクチャです。" />
+    <meta name="description" content="RELinkは、現実世界のエンティティをWeb上の能力として発見・理解・実行可能にするためのオープンなアーキテクチャです。AR-XML Core Draft 4の代表的な処理経路を実ブラウザで検証済みです。" />
     <meta name="theme-color" content="#071b2b" />
     <link rel="canonical" href="https://ranmaru50.github.io/relink-site/" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="RELink" />
     <meta property="og:title" content="RELink — Real Entity Link" />
-    <meta property="og:description" content="現実世界のエンティティを、発見・理解・実行可能な能力としてWebへ接続するオープンアーキテクチャ。" />
+    <meta property="og:description" content="AR-XML Core Draft 4の代表的な処理経路を実ブラウザで検証済み。次はResolverによるEntity IdentityとLocationの分離へ。" />
     <meta property="og:url" content="https://ranmaru50.github.io/relink-site/" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="RELink — Real Entity Link" />
@@ -32,6 +32,7 @@
       <nav id="site-nav" aria-label="メインナビゲーション">
         <a href="#concept">Concept</a>
         <a href="#architecture">Architecture</a>
+        <a href="#validation">Validation</a>
         <a href="#use-cases">Use cases</a>
         <a href="#roadmap">Roadmap</a>
         <a class="nav-cta" href="https://github.com/ranmaru50" rel="noreferrer">GitHub ↗</a>
@@ -40,13 +41,13 @@
 
     <main id="top">
       <section class="hero section-shell">
-        <div class="eyebrow"><span>OPEN ARCHITECTURE</span><span>Draft 0.1</span></div>
+        <div class="eyebrow"><span>OPEN ARCHITECTURE</span><span>DRAFT 4 · BROWSER E2E PASSED</span></div>
         <div class="hero-grid">
           <div class="hero-copy">
             <p class="kicker">Real Entity Link</p>
             <h1>現実世界を、<br /><em>理解できるWeb</em>へ。</h1>
             <p class="lead">RELinkは、モノや設備、ロボットなどの現実のエンティティを、発見・理解・実行可能な能力としてWebへ接続するためのオープンなアーキテクチャです。</p>
-            <p class="lead-detail">QRやNFCなどから対象を識別し、機械可読なCapabilityを取得して、WebやネイティブRuntimeから利用します。</p>
+            <p class="lead-detail">AR-XML Core Draft 4のWeb Runtime baselineを実装し、代表的な取得・解析・発見・明示的実行・結果解釈の経路を実ブラウザで検証しました。次はResolverによるEntity IdentityとLocationの分離を検証します。</p>
             <div class="hero-actions">
               <a class="button primary" href="#arxml-example">AR-XMLを見る <span>↓</span></a>
               <a class="button secondary" href="#projects">Explore projects ↘</a>
@@ -71,7 +72,7 @@
               <small>SEMANTICS</small>
               <strong>Runtime</strong>
               <span>Discover · Evaluate · Invoke</span>
-              <mark class="node-status experimental">EXPERIMENTAL</mark>
+              <mark class="node-status experimental">BASELINE IMPLEMENTED</mark>
             </div>
             <div class="map-node node-capability">
               <small>ACTION</small>
@@ -81,7 +82,7 @@
             </div>
           </div>
         </div>
-        <div class="hero-footnote"><span>STATUS</span><p>Working code and future architecture are labeled separately throughout this site.</p></div>
+        <div class="hero-footnote"><span>VALIDATED SCOPE</span><p>Representative Draft 4 processing paths passed in a real browser. Coverage remains intentionally bounded to those paths.</p></div>
       </section>
 
       <section id="concept" class="manifesto section-shell">
@@ -115,16 +116,47 @@
         </div>
 
         <div class="architecture-stack">
-          <article class="layer arxml"><span class="layer-no">A</span><div><small>DESCRIPTION</small><h3>AR-XML</h3></div><p>Capability、結果、要件、実行Interfaceを記述する機械可読な契約。</p><b>Core 0.1 / Draft 4</b><span class="phase-badge experimental">EXPERIMENTAL</span></article>
-          <article class="layer runtime"><span class="layer-no">B</span><div><small>EXECUTION</small><h3>Web Runtime</h3></div><p>AR-XMLを読み、検証し、利用可能性を評価してHTTP Interfaceを呼び出す。</p><b>Browser PoC</b><span class="phase-badge implemented">IMPLEMENTED PoC</span></article>
-          <article class="layer testbed"><span class="layer-no">C</span><div><small>CONFIDENCE</small><h3>Testbed</h3></div><p>共通fixtureとHTTP scenarioでRuntimeの一貫した振る舞いを検証する。</p><b>Conformance baseline</b><span class="phase-badge development">IN DEVELOPMENT</span></article>
+          <article class="layer arxml"><span class="layer-no">A</span><div><small>ENTITY INTERFACE DESCRIPTION</small><h3>AR-XML</h3></div><p>EntityのCategory、Profiles、Capabilities、Inputs、Results、Requirements、Interfacesを記述する言語。UI記述ではありません。</p><b>Core 0.1 / Draft 4</b><span class="phase-badge experimental">DRAFT / STABILIZING</span></article>
+          <article class="layer runtime"><span class="layer-no">B</span><div><small>EXECUTION</small><h3>Web Runtime</h3></div><p>AR-XMLを取得・解析し、Capabilityを公開する実装。InvocationはHumanまたはApplicationの明示的な要求でのみ発生します。</p><b>Representative browser E2E passed</b><span class="phase-badge implemented">BASELINE IMPLEMENTED</span></article>
+          <article class="layer testbed"><span class="layer-no">C</span><div><small>CONFIDENCE</small><h3>Testbed</h3></div><p>AR-XML Runtimeと将来のRELink Protocol componentsを検証する、独立した決定論的テスト環境。</p><b>Fixtures · Scenarios · Observations</b><span class="phase-badge implemented">OPERATIONAL</span></article>
           <article class="layer resolver"><span class="layer-no">D</span><div><small>RESOLUTION</small><h3>Resolver</h3></div><p>物理Anchorや永続IDを、現在のEntity identityとAR-XML locationへ解決する。</p><b>Identity → Location</b><span class="phase-badge planned">PLANNED</span></article>
           <article class="layer trust"><span class="layer-no">E</span><div><small>TRUST</small><h3>Manifest / Trust</h3></div><p>文書の真正性、鍵のローテーション、所有権やlifecycleを段階的に扱う。</p><b>After Resolver</b><span class="phase-badge future">FUTURE</span></article>
         </div>
+        <div class="role-separation" aria-label="AR-XMLとRELinkの責務分離">
+          <article><small>AR-XML</small><strong>Entity Interface Description</strong><p>Entityが何であり、どのCapability・入出力・要件・Interfaceを持つかを記述します。</p></article>
+          <article><small>RELink</small><strong>Resolution · Identity · Trust</strong><p>Physical Entityをそのモデルへ参加させ、長期的なIdentityと現在位置、将来のTrustを扱います。</p></article>
+        </div>
+        <p class="identity-note"><span>DESIGN RULE</span> Retrieval URL <b>≠</b> Canonical Entity Identity</p>
+      </section>
+
+      <section id="validation" class="validation section-shell">
+        <div class="section-index">03 / BROWSER VALIDATION</div>
+        <div class="validation-head">
+          <div><p class="kicker">REPRESENTATIVE E2E PASS</p><h2>代表的な処理経路を、<br />実ブラウザで確認。</h2></div>
+          <p>AR-XML Core Draft 4の代表的な処理経路について、RELink TestbedとWeb Runtime Test Harnessを用いた外部統合テストを完了しています。確認範囲は、今回実行した代表ケースに限定されます。</p>
+        </div>
+
+        <ol class="validation-flow" aria-label="実ブラウザで確認済みの処理経路">
+          <li><span>01</span><strong>AR-XML取得</strong></li>
+          <li><span>02</span><strong>Draft 4 Parse</strong></li>
+          <li><span>03</span><strong>Capability Discovery</strong></li>
+          <li><span>04</span><strong>Explicit Invocation</strong></li>
+          <li><span>05</span><strong>HTTP GET / POST</strong></li>
+          <li><span>06</span><strong>CORS / Preflight</strong></li>
+          <li><span>07</span><strong>Response Interpretation</strong></li>
+          <li><span>08</span><strong>Result / Error Mapping</strong></li>
+        </ol>
+
+        <div class="validation-roles">
+          <article><small>TEST CONDITIONS</small><h3>RELink Testbed</h3><p>Fixtures、protocol scenarios、観測結果を決定論的に提供します。Runtime本体から独立した検証環境です。</p></article>
+          <article><small>HUMAN-OPERATED DRIVER</small><h3>Web Runtime Test Harness</h3><p>人がブラウザ上でケースを選択・実行し、Web Runtimeの動作と観測結果を確認するアプリケーションです。</p></article>
+          <article><small>IMPLEMENTATION UNDER TEST</small><h3>Web Runtime</h3><p>AR-XMLを処理し、Consumerの明示的な要求を受けてCapabilityを実行する検証対象です。Testbedへの依存は持ちません。</p></article>
+        </div>
+        <p class="validation-boundary"><span>BOUNDARY</span><strong>Representative E2E PASS</strong><b>≠</b><strong>All specification paths validated</strong></p>
       </section>
 
       <section id="arxml-example" class="example section-shell">
-        <div class="section-index">03 / AR-XML EXAMPLE</div>
+        <div class="section-index">04 / AR-XML EXAMPLE</div>
         <div class="example-head">
           <div>
             <p class="kicker">CONCRETE CONTRACT</p>
@@ -168,7 +200,7 @@
       </section>
 
       <section class="journey section-shell">
-        <div class="section-index">04 / ONE JOURNEY</div>
+        <div class="section-index">05 / CURRENT &amp; TARGET FLOW</div>
         <div class="journey-head">
           <div><p class="kicker">CURRENT &amp; TARGET</p><h2>現在の最小フローと、<br />目指す全体フロー。</h2></div>
           <p>Web Runtimeで試せる現在のBaselineと、Resolver導入後にPhysical Anchorから始まるTarget Architectureを分けて示します。</p>
@@ -177,13 +209,14 @@
           <article class="journey-mode current">
             <div class="journey-mode-head">
               <div><span>01 / CURRENT BASELINE</span><h3>AR-XML URLから実行する</h3></div>
-              <mark>EXPERIMENTAL PoC</mark>
+              <mark>BASELINE VALIDATED</mark>
             </div>
-            <p>現在のWeb Runtimeが実装している最小経路。既知のAR-XML URLを読み込み、Capabilityを発見してHTTP Interfaceを呼び出します。</p>
+            <p>現在のWeb Runtimeが実装している最小経路。AR-XMLの読み込みだけではCapabilityを実行しません。HumanまたはApplicationが発見したCapabilityを選び、明示的にInvocationを要求します。</p>
             <div class="journey-flow" aria-label="現在のBaseline">
-              <span><small>INPUT</small>AR-XML URL</span><i>→</i>
-              <span><small>EXECUTE</small>Web Runtime</span><i>→</i>
-              <strong><small>RESULT</small>Capability</strong>
+              <span><small>LOAD</small>AR-XML URL</span><i>→</i>
+              <span><small>DISCOVER</small>Web Runtime</span><i>→</i>
+              <span><small>REQUEST</small>Human / Application</span><i>→</i>
+              <strong><small>INVOKE</small>Capability</strong>
             </div>
           </article>
           <article class="journey-mode target">
@@ -204,9 +237,29 @@
         <p class="journey-note"><span>BOUNDARY</span> ResolverはTarget Architectureの構成要素であり、現在のWeb Runtime Baselineには含まれません。</p>
       </section>
 
+      <section class="security-scope section-shell">
+        <div class="section-index">06 / SECURITY SCOPE</div>
+        <div class="security-grid">
+          <article class="security-current">
+            <span class="phase-badge implemented">VALIDATED BASELINE</span>
+            <small>L0 / DIRECT RETRIEVAL</small>
+            <h2>AR-XML URL<br />→ Runtime</h2>
+            <p>直接AR-XMLを取得する経路と、実ブラウザが持つ通常のネットワークセキュリティ境界を確認しています。</p>
+          </article>
+          <article class="security-next">
+            <span class="phase-badge planned">NEXT VALIDATION</span>
+            <small>L1 / RESOLUTION</small>
+            <h2>Anchor<br />→ Resolver</h2>
+            <p>Canonical Entity Identityと現在のAR-XML Locationを分離し、HTTPS経由でRuntimeへ接続する流れを次に検証します。</p>
+            <div class="security-flow">Anchor → Resolver → Canonical Entity Identity → AR-XML Location → HTTPS → Runtime</div>
+          </article>
+        </div>
+        <p class="security-note">署名付きMetadata、Trust Chain、Certificationは未実装のFuture workです。</p>
+      </section>
+
 
       <section id="use-cases" class="use-cases section-shell">
-        <div class="section-index">05 / USE CASES</div>
+        <div class="section-index">07 / USE CASES</div>
         <div class="use-cases-head">
           <div>
             <p class="kicker">FROM LINK TO ACTION</p>
@@ -266,7 +319,7 @@
       </section>
 
       <section id="positioning" class="positioning section-shell">
-        <div class="section-index">06 / POSITIONING</div>
+        <div class="section-index">08 / POSITIONING</div>
         <div class="positioning-head">
           <div><p class="kicker">RELATED TECHNOLOGIES</p><h2>既存のWebを置き換えず、<br />意味とIdentityを重ねる。</h2></div>
           <p>RELinkはHTTPやWeb APIを置き換える提案ではありません。既存技術を実行手段として使いながら、Physical Entityから意味的なCapabilityまでを一続きに扱う上位アーキテクチャです。</p>
@@ -282,40 +335,47 @@
       </section>
 
       <section id="roadmap" class="roadmap section-shell">
-        <div class="section-index light">07 / ROADMAP</div>
-        <div class="roadmap-head"><div><p class="kicker coral">BUILD ORDER</p><h2>Architecture proof<br />への道筋。</h2></div><p>最初の目標は、Physical Entityから複数RuntimeによるCapability実行までを、共通のConformance Suiteで実証することです。</p></div>
+        <div class="section-index light">09 / ROADMAP</div>
+        <div class="roadmap-head"><div><p class="kicker coral">FROM BASELINE TO RESOLUTION</p><h2>次はRELink固有の<br />Resolver層へ。</h2></div><p>Draft 4の代表的な実装経路を実ブラウザで確認する段階を完了し、次はAnchorからCanonical Entity IdentityとAR-XML Locationを解決するL1統合へ進みます。</p></div>
         <div class="milestones">
-          <article class="milestone active"><span class="status">NOW</span><div class="milestone-id">M1</div><h3>Runtime Baseline</h3><p>Web RuntimeがDraft 4を安定して解釈し、HTTP Capabilityを実行できる。</p><ul><li>Parser / Validation</li><li>URL Resolution</li><li>Result Mapping</li></ul></article>
-          <article class="milestone active"><span class="status">NOW</span><div class="milestone-id">M2</div><h3>Conformance Baseline</h3><p>独立したTestbedがWeb Runtimeを実際のE2Eケースで自動検証する。</p><ul><li>Draft 4 Fixtures</li><li>Executable Cases</li><li>Normalized Results</li></ul></article>
-          <article class="milestone"><span class="status">NEXT</span><div class="milestone-id">M3</div><h3>Entity Resolution</h3><p>AnchorからResolverを経て、EntityとAR-XMLへ到達する一連の流れを作る。</p><ul><li>Resolver MVP</li><li>Lifecycle</li><li>Resolver Testbed</li></ul></article>
-          <article class="milestone"><span class="status">THEN</span><div class="milestone-id">M4</div><h3>Second Runtime</h3><p>PythonまたはKotlinが同じケースを通り、Platform independenceを示す。</p><ul><li>Shared Semantics</li><li>Runtime Adapter</li><li>Cross-platform Proof</li></ul></article>
+          <article class="milestone active completed"><span class="status">COMPLETED</span><div class="milestone-id">M1</div><h3>Draft 4 Baseline</h3><p>Web Runtime、Testbed、Test Harnessを接続し、代表経路を実ブラウザで検証。</p><ul><li>Core Draft 4</li><li>GET / POST / CORS</li><li>Result / Error Mapping</li></ul></article>
+          <article class="milestone active completed"><span class="status">COMPLETED</span><div class="milestone-id">M2</div><h3>Independent Testbed</h3><p>決定論的なfixture、protocol scenario、観測をRuntimeから独立して提供。</p><ul><li>Draft 4 Fixtures</li><li>Protocol Scenarios</li><li>Browser Harness</li></ul></article>
+          <article class="milestone next"><span class="status">NEXT</span><div class="milestone-id">M3</div><h3>Resolver MVP / L1</h3><p>AnchorからResolverを経て、Canonical Entity IdentityとLocationを分離する。</p><ul><li>Resolver MVP</li><li>Identity ≠ Location</li><li>HTTPS L1 Integration</li></ul></article>
+          <article class="milestone"><span class="status">PLANNED</span><div class="milestone-id">M4</div><h3>Trust &amp; Expansion</h3><p>Resolver検証後にTrust metadataと第二Runtimeによる共通意味モデルを検討する。</p><ul><li>Signed Metadata</li><li>Trust Chain</li><li>Second Runtime</li></ul></article>
         </div>
       </section>
 
       <section id="projects" class="open-section section-shell">
         <div class="open-panel">
-          <div class="section-index">08 / EXPLORE THE PROJECT</div>
+          <div class="section-index">10 / EXPLORE THE PROJECT</div>
           <p class="kicker">OPEN BY DESIGN</p>
           <h2>説明の次は、<br />動く実装と仕様へ。</h2>
-          <p>RELinkはまだ設計検証の途中です。公開している仕様、Runtime、Testbedから現在の到達点と課題を確認できます。</p>
+          <p>Draft 4の代表的な処理経路は実ブラウザで確認済みです。公開している仕様、Runtime、TestbedとHarnessの利用方法から、検証済みの範囲と次の課題を確認できます。</p>
           <div class="project-grid">
             <a class="project-card" href="https://github.com/ranmaru50/relink-web-runtime" rel="noreferrer">
-              <span class="phase-badge implemented">EXPERIMENTAL PoC</span>
+              <span class="phase-badge implemented">BASELINE IMPLEMENTED</span>
               <small>01 / EXECUTE</small>
               <h3>Web Runtime</h3>
-              <p>AR-XML Draft 4をBrowserで解釈し、HTTP Capabilityを実行するReference PoC。</p>
+              <p>AR-XML Draft 4をBrowserで解釈し、Consumerの明示的要求でHTTP Capabilityを実行するRuntime。</p>
               <b>Explore repository ↗</b>
             </a>
             <a class="project-card" href="https://github.com/ranmaru50/relink-testbed" rel="noreferrer">
-              <span class="phase-badge development">IN DEVELOPMENT</span>
+              <span class="phase-badge implemented">OPERATIONAL</span>
               <small>02 / VERIFY</small>
               <h3>Testbed</h3>
-              <p>Runtimeの意味的な一貫性と相互運用性を検証するローカル試験基盤。</p>
+              <p>Runtimeと将来のProtocol componentsを検証する独立・決定論的な試験環境。</p>
               <b>Explore repository ↗</b>
+            </a>
+            <a class="project-card" href="https://github.com/ranmaru50/relink-web-runtime#web-runtime-test-harness" rel="noreferrer">
+              <span class="phase-badge implemented">BROWSER TESTED</span>
+              <small>03 / DRIVE</small>
+              <h3>Test Harness</h3>
+              <p>人が実ブラウザでWeb Runtimeを操作し、結果・Error・Testbed observationを比較する評価UI。</p>
+              <b>Read usage guide ↗</b>
             </a>
             <a class="project-card" href="https://github.com/ranmaru50/relink-web-runtime/blob/main/docs/specs/arxml-core-0.1-draft4.md" rel="noreferrer">
               <span class="phase-badge experimental">DRAFT 4</span>
-              <small>03 / READ</small>
+              <small>04 / READ</small>
               <h3>AR-XML Core</h3>
               <p>Entity、Capability、Result、Requirement、Interfaceの現在の情報モデル。</p>
               <b>Read specification ↗</b>
