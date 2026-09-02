@@ -128,9 +128,9 @@ nav a:hover { color: var(--coral); }
 .legend-dot.development { background: #ffd166; }
 .legend-dot.planned { background: var(--coral); }
 .legend-dot.future { border: 1px solid #9aabb5; }
-.phase-badge { display: inline-block; justify-self: end; padding: 4px 7px; white-space: nowrap; border: 1px solid; font: 500 8px var(--mono); letter-spacing: .08em; }
+.phase-badge { display: inline-block; justify-self: end; padding: 5px 8px; white-space: nowrap; border: 1px solid; font: 600 9px var(--mono); letter-spacing: .08em; }
 .phase-badge.implemented { color: var(--ink); border-color: var(--mint); background: var(--mint); }
-.phase-badge.development { color: #ffd166; border-color: #ffd166; }
+.phase-badge.development { color: var(--ink); border-color: #ffd166; background: #ffd166; }
 .phase-badge.experimental { color: var(--coral); border-color: var(--coral); }
 .phase-badge.planned { color: var(--coral); border-color: var(--coral); }
 .phase-badge.future { color: #9aabb5; border-color: #657985; }
