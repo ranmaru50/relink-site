@@ -33,7 +33,7 @@
         <a href="#concept">Concept</a>
         <a href="#architecture">Architecture</a>
         <a href="#validation">Validation</a>
-        <a href="smart-home.html">Guide</a>
+        <a class="guide-nav-link" href="smart-home.html">Guide ↗</a>
         <a href="#use-cases">Use cases</a>
         <a href="#roadmap">Roadmap</a>
         <a class="nav-cta" href="https://github.com/ranmaru50" rel="noreferrer">GitHub ↗</a>
@@ -51,7 +51,7 @@
             <p class="lead-detail">AR-XML Core Draft 4のWeb Runtime baselineを実ブラウザで検証しました。現在はResolver Core 0.1等のFrozen仕様を基礎に、Canonical Entity IdentityとDescription Locationを分離するReference Resolverの実装とL1統合検証へ進んでいます。</p>
             <div class="hero-actions">
               <a class="button primary" href="#arxml-example">AR-XMLを見る <span>↓</span></a>
-              <a class="button secondary" href="#projects">Explore projects ↘</a>
+              <a class="button secondary guide-button" href="smart-home.html">Smart Home Guide <span>↗</span></a>
             </div>
           </div>
 
@@ -84,6 +84,23 @@
           </div>
         </div>
         <div class="hero-footnote"><span>VALIDATED SCOPE</span><p>Representative Draft 4 processing paths passed in a real browser. Coverage remains intentionally bounded to those paths.</p></div>
+      </section>
+
+      <section class="guide-entry section-shell" aria-labelledby="guide-entry-title">
+        <a class="guide-entry-card" href="smart-home.html">
+          <div class="guide-entry-meta"><span>NEW / TECHNICAL GUIDE</span><b>SEPARATE PAGE ↗</b></div>
+          <div class="guide-entry-body">
+            <div>
+              <p class="kicker">BUILD A SMART HOME WITH RELINK</p>
+              <h2 id="guide-entry-title">照明と室温で学ぶ、<br />RELinkの実装フロー。</h2>
+              <p>Resolver、AR-XML、Web Runtime、Application、通常のHTTPS APIが担う責務を、ひとつの部屋を例に順番に解説します。</p>
+            </div>
+            <div class="guide-entry-flow" aria-hidden="true">
+              <span>Resolver</span><i>→</i><span>AR-XML</span><i>→</i><span>Runtime</span><i>→</i><strong>Light / Temperature</strong>
+            </div>
+          </div>
+          <div class="guide-entry-cta"><span>Architecture diagram · Draft 4 XML · Runtime API · Security boundary</span><strong>Read the guide ↗</strong></div>
+        </a>
       </section>
 
       <section id="concept" class="manifesto section-shell">

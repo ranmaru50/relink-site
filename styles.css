@@ -29,6 +29,8 @@ em { color: var(--coral); font-style: normal; }
 .brand-mark::after { top: 14px; transform: rotate(29deg); }
 nav { display: flex; align-items: center; gap: 32px; font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .06em; }
 nav a:hover { color: var(--coral); }
+.guide-nav-link { position: relative; color: var(--coral); font-weight: 600; }
+.guide-nav-link::before { content: ""; position: absolute; right: 0; bottom: -7px; left: 0; height: 2px; background: var(--coral); }
 .nav-cta { padding: 9px 15px; color: var(--paper); background: var(--ink); }
 .nav-cta:hover { color: var(--mint) !important; }
 .menu-button { display: none; color: var(--ink); background: transparent; border: 1px solid var(--ink); font: 500 12px var(--mono); text-transform: uppercase; }
@@ -47,6 +49,8 @@ nav a:hover { color: var(--coral); }
 .button.primary { color: var(--paper); background: var(--ink); }
 .button.primary:hover { color: var(--mint); }
 .button.secondary:hover { background: var(--paper-2); }
+.button.guide-button { color: var(--ink); border-color: var(--coral); background: var(--coral); }
+.button.guide-button:hover { color: var(--paper); background: var(--ink); }
 
 .system-map { position: relative; height: 520px; background: var(--ink); color: var(--paper); overflow: hidden; }
 .system-map::before { content: ""; position: absolute; inset: 0; opacity: .13; background-image: linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px); background-size: 32px 32px; }
@@ -71,6 +75,24 @@ nav a:hover { color: var(--coral); }
 @keyframes pulse { 0%,100% { transform: translateY(0); opacity: .6; } 50% { transform: translateY(270px); opacity: 1; } }
 .hero-footnote { display: flex; gap: 14px; align-items: center; padding-top: 20px; border-top: 1px solid var(--line); font: 10px var(--mono); text-transform: uppercase; letter-spacing: .07em; }
 .hero-footnote span { color: var(--coral); }
+
+.guide-entry { padding-top: 24px; padding-bottom: 112px; }
+.guide-entry-card { display: block; border: 1px solid var(--ink); background: var(--paper-2); transition: transform .2s, box-shadow .2s; }
+.guide-entry-card:hover { transform: translateY(-4px); box-shadow: 10px 10px 0 var(--ink); }
+.guide-entry-card:focus-visible { outline: 3px solid var(--coral); outline-offset: 4px; }
+.guide-entry-meta { min-height: 50px; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; color: var(--paper); background: var(--ink); font: 500 10px var(--mono); letter-spacing: .1em; }
+.guide-entry-meta span { color: var(--mint); }
+.guide-entry-meta b { color: var(--coral); font-weight: 500; }
+.guide-entry-body { min-height: 360px; padding: 48px; display: grid; grid-template-columns: 1fr .75fr; gap: 70px; align-items: center; }
+.guide-entry-body h2 { margin: 0; font-size: clamp(36px, 4.5vw, 62px); line-height: 1.16; letter-spacing: -.055em; }
+.guide-entry-body p:not(.kicker) { max-width: 680px; margin: 24px 0 0; font-size: 14px; }
+.guide-entry-flow { padding: 32px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; color: var(--paper); background: var(--ink); font: 500 10px var(--mono); }
+.guide-entry-flow span, .guide-entry-flow strong { padding: 9px 11px; border: 1px solid rgba(255,255,255,.35); }
+.guide-entry-flow strong { color: var(--ink); background: var(--mint); border-color: var(--mint); }
+.guide-entry-flow i { color: var(--coral); font-style: normal; }
+.guide-entry-cta { min-height: 68px; padding: 0 24px; display: flex; justify-content: space-between; gap: 30px; align-items: center; border-top: 1px solid var(--ink); font: 500 11px var(--mono); }
+.guide-entry-cta span { color: #60727d; }
+.guide-entry-cta strong { color: var(--coral); font-weight: 600; }
 
 .manifesto, .validation, .security-scope { border-top: 1px solid var(--line); }
 .manifesto-grid { display: grid; grid-template-columns: 1fr .75fr; gap: 100px; margin: 70px 0 90px; }
@@ -276,6 +298,7 @@ nav a:hover { color: var(--coral); }
   .section-shell { padding: 80px 24px; }
   .hero { padding-top: 30px; }
   .hero-grid, .manifesto-grid, .architecture-head, .roadmap-head, .journey-head, .use-cases-head, .example-head, .positioning-head, .validation-head { grid-template-columns: 1fr; gap: 45px; }
+  .guide-entry-body { grid-template-columns: 1fr; gap: 38px; }
   .hero-grid { padding-top: 55px; }
   .system-map { height: 500px; }
   .principle-grid, .milestones, .use-case-list, .validation-roles, .security-grid, .role-separation { grid-template-columns: 1fr; }
@@ -297,6 +320,11 @@ nav a:hover { color: var(--coral); }
 
 @media (max-width: 540px) {
   .hero h1 { font-size: 43px; }
+  .guide-entry { padding-top: 10px; }
+  .guide-entry-body { min-height: auto; padding: 34px 22px; }
+  .guide-entry-flow { align-items: stretch; flex-direction: column; padding: 24px 18px; }
+  .guide-entry-flow i { align-self: center; transform: rotate(90deg); }
+  .guide-entry-meta, .guide-entry-cta { align-items: flex-start; flex-direction: column; justify-content: center; gap: 5px; padding: 14px 18px; }
   .system-map { height: 560px; }
   .map-node { width: 180px; }
   .node-source, .node-runtime { left: 18px; }
