@@ -61,6 +61,7 @@ nav a:hover { color: var(--coral); }
 .node-status { display: inline-block; margin-top: 7px; padding: 2px 5px; color: var(--ink); border: 0; font: 500 8px var(--mono); letter-spacing: .08em; }
 .node-status.planned { background: var(--coral); }
 .node-status.experimental { background: var(--mint); }
+.node-status.development { color: var(--ink); background: #ffd166; }
 .node-source { top: 82px; left: 28px; }
 .node-resolver { top: 190px; right: 28px; }
 .node-runtime { top: 298px; left: 28px; }
@@ -263,6 +264,9 @@ nav a:hover { color: var(--coral); }
 .project-card p { margin: 0; font-size: 12px; }
 .project-card b { margin-top: auto; font: 500 10px var(--mono); }
 .project-card:hover b { color: var(--mint); }
+.project-card.resolver-project { grid-column: span 2; min-height: 300px; color: var(--paper); background: var(--ink); }
+.project-card.resolver-project p { max-width: 760px; color: #bac5cb; }
+.project-card.resolver-project b { color: var(--mint); }
 
 @media (max-width: 900px) {
   .site-header { padding: 0 22px; }
@@ -282,6 +286,7 @@ nav a:hover { color: var(--coral); }
   .layer { grid-template-columns: 45px 1fr; padding: 25px 0; }
   .layer p, .layer b, .layer .phase-badge { grid-column: 2; justify-self: start; margin: 0; }
   .example-grid, .project-grid { grid-template-columns: 1fr; }
+  .project-card.resolver-project { grid-column: auto; }
   .technology-list article { grid-template-columns: .7fr 1fr; padding: 18px 0; }
   .technology-list b { grid-column: 2; justify-self: start; text-align: left; }
   .journey-flow span, .journey-flow strong { min-width: 118px; }

@@ -4,7 +4,7 @@ RELink（Real Entity Link）の考え方、アーキテクチャ、想定ユー�
 
 AR-XML Core Draft 4を基礎とするWeb Runtime baseline、独立したRELink Testbed、Web Runtime Test Harnessを接続し、代表的な処理経路を実ブラウザ環境で検証済みです。確認範囲は、今回実行した代表ケースに限定されます。
 
-現在の次段階は、Resolver MVPによるCanonical Entity IdentityとAR-XML Locationの分離、およびHTTPSベースのL1統合検証です。
+Resolver Core 0.1、Resolver Lifecycle 0.1、Manifest 0.1、Conformance Catalog 0.1、Web Runtime Integration Contract 0.1等はFrozen baselineとなり、Reference Resolverの実装が始まっています。現在の次段階は、HTTPSベースのL1外部統合検証です。
 
 ## Website
 
@@ -46,6 +46,7 @@ python3 -m http.server 8080
 
 - [relink-web-runtime](https://github.com/ranmaru50/relink-web-runtime)
 - [relink-testbed](https://github.com/ranmaru50/relink-testbed)
+- [relink-resolver](https://github.com/ranmaru50/relink-resolver)
 - [Web Runtime Test Harness usage](https://github.com/ranmaru50/relink-web-runtime#web-runtime-test-harness)
 - [AR-XML Core 0.1 Draft 4](https://github.com/ranmaru50/relink-web-runtime/blob/main/docs/specs/arxml-core-0.1-draft4.md)
 

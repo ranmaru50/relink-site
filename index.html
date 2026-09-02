@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="RELinkは、現実世界のエンティティをWeb上の能力として発見・理解・実行可能にするためのオープンなアーキテクチャです。AR-XML Core Draft 4の代表的な処理経路を実ブラウザで検証済みです。" />
+    <meta name="description" content="RELinkは、現実世界のエンティティをWeb上の能力として発見・理解・実行可能にするためのオープンなアーキテクチャです。Web Runtime baselineの実ブラウザ検証を終え、Resolver 0.1のReference implementationへ進んでいます。" />
     <meta name="theme-color" content="#071b2b" />
     <link rel="canonical" href="https://ranmaru50.github.io/relink-site/" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="RELink" />
     <meta property="og:title" content="RELink — Real Entity Link" />
-    <meta property="og:description" content="AR-XML Core Draft 4の代表的な処理経路を実ブラウザで検証済み。次はResolverによるEntity IdentityとLocationの分離へ。" />
+    <meta property="og:description" content="Web Runtime baselineの実ブラウザ検証を終え、Frozen Resolver 0.1仕様を基礎とするReference implementationへ。" />
     <meta property="og:url" content="https://ranmaru50.github.io/relink-site/" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="RELink — Real Entity Link" />
@@ -41,13 +41,13 @@
 
     <main id="top">
       <section class="hero section-shell">
-        <div class="eyebrow"><span>OPEN ARCHITECTURE</span><span>DRAFT 4 · BROWSER E2E PASSED</span></div>
+        <div class="eyebrow"><span>OPEN ARCHITECTURE</span><span>RESOLVER 0.1 FROZEN · IMPLEMENTING</span></div>
         <div class="hero-grid">
           <div class="hero-copy">
             <p class="kicker">Real Entity Link</p>
             <h1>現実世界を、<br /><em>理解できるWeb</em>へ。</h1>
             <p class="lead">RELinkは、モノや設備、ロボットなどの現実のエンティティを、発見・理解・実行可能な能力としてWebへ接続するためのオープンなアーキテクチャです。</p>
-            <p class="lead-detail">AR-XML Core Draft 4のWeb Runtime baselineを実装し、代表的な取得・解析・発見・明示的実行・結果解釈の経路を実ブラウザで検証しました。次はResolverによるEntity IdentityとLocationの分離を検証します。</p>
+            <p class="lead-detail">AR-XML Core Draft 4のWeb Runtime baselineを実ブラウザで検証しました。現在はResolver Core 0.1等のFrozen仕様を基礎に、Canonical Entity IdentityとDescription Locationを分離するReference Resolverの実装とL1統合検証へ進んでいます。</p>
             <div class="hero-actions">
               <a class="button primary" href="#arxml-example">AR-XMLを見る <span>↓</span></a>
               <a class="button secondary" href="#projects">Explore projects ↘</a>
@@ -66,7 +66,7 @@
               <small>IDENTITY</small>
               <strong>Resolver</strong>
               <span>Identity → Location</span>
-              <mark class="node-status planned">PLANNED</mark>
+              <mark class="node-status development">IMPLEMENTING</mark>
             </div>
             <div class="map-node node-runtime">
               <small>SEMANTICS</small>
@@ -119,8 +119,8 @@
           <article class="layer arxml"><span class="layer-no">A</span><div><small>ENTITY INTERFACE DESCRIPTION</small><h3>AR-XML</h3></div><p>EntityのCategory、Profiles、Capabilities、Inputs、Results、Requirements、Interfacesを記述する言語。UI記述ではありません。</p><b>Core 0.1 / Draft 4</b><span class="phase-badge experimental">DRAFT / STABILIZING</span></article>
           <article class="layer runtime"><span class="layer-no">B</span><div><small>EXECUTION</small><h3>Web Runtime</h3></div><p>AR-XMLを取得・解析し、Capabilityを公開する実装。InvocationはHumanまたはApplicationの明示的な要求でのみ発生します。</p><b>Representative browser E2E passed</b><span class="phase-badge implemented">BASELINE IMPLEMENTED</span></article>
           <article class="layer testbed"><span class="layer-no">C</span><div><small>CONFIDENCE</small><h3>Testbed</h3></div><p>AR-XML Runtimeと将来のRELink Protocol componentsを検証する、独立した決定論的テスト環境。</p><b>Fixtures · Scenarios · Observations</b><span class="phase-badge implemented">OPERATIONAL</span></article>
-          <article class="layer resolver"><span class="layer-no">D</span><div><small>RESOLUTION</small><h3>Resolver</h3></div><p>物理Anchorや永続IDを、現在のEntity identityとAR-XML locationへ解決する。</p><b>Identity → Location</b><span class="phase-badge planned">PLANNED</span></article>
-          <article class="layer trust"><span class="layer-no">E</span><div><small>TRUST</small><h3>Manifest / Trust</h3></div><p>文書の真正性、鍵のローテーション、所有権やlifecycleを段階的に扱う。</p><b>After Resolver</b><span class="phase-badge future">FUTURE</span></article>
+          <article class="layer resolver"><span class="layer-no">D</span><div><small>RESOLUTION</small><h3>Resolver</h3></div><p>Anchor UUIDを現在のHTTPS Description Locationへ解決するL1層。Core・Lifecycle・Integration Contract 0.1はFrozenです。</p><b>303 · Lifecycle · L0/L1 handoff</b><span class="phase-badge development">SPEC FROZEN / IMPLEMENTING</span></article>
+          <article class="layer trust"><span class="layer-no">E</span><div><small>METADATA / TRUST</small><h3>Manifest / Trust</h3></div><p>Manifest 0.1とExtension PolicyはFrozen。署名、Trust Chain、所有権移転などのAuthority層は後続段階です。</p><b>Manifest ≠ Trust</b><span class="phase-badge development">MANIFEST FROZEN · TRUST FUTURE</span></article>
         </div>
         <div class="role-separation" aria-label="AR-XMLとRELinkの責務分離">
           <article><small>AR-XML</small><strong>Entity Interface Description</strong><p>Entityが何であり、どのCapability・入出力・要件・Interfaceを持つかを記述します。</p></article>
@@ -222,9 +222,9 @@
           <article class="journey-mode target">
             <div class="journey-mode-head">
               <div><span>02 / TARGET ARCHITECTURE</span><h3>Physical Anchorから解決する</h3></div>
-              <mark>RESOLVER PLANNED</mark>
+              <mark>RESOLVER IMPLEMENTING</mark>
             </div>
-            <p>Resolver導入後の想定フロー。QRやNFCなどのAnchorから永続的なEntity identityと現在のAR-XML locationを解決します。</p>
+            <p>Frozen Resolver Core 0.1を基礎に実装中のL1フロー。Anchor UUIDから現在のHTTPS Description Locationへ解決し、最終AR-XML URLをRuntimeへ引き渡します。</p>
             <div class="journey-flow" aria-label="Resolver導入後のTarget Architecture">
               <span><small>TOUCH</small>Anchor</span><i>→</i>
               <span class="planned-step"><small>RESOLVE</small>Resolver</span><i>→</i>
@@ -234,7 +234,7 @@
             </div>
           </article>
         </div>
-        <p class="journey-note"><span>BOUNDARY</span> ResolverはTarget Architectureの構成要素であり、現在のWeb Runtime Baselineには含まれません。</p>
+        <p class="journey-note"><span>BOUNDARY</span> Resolver仕様とReference implementationは開始済みですが、Resolver-mediated L1 pathの外部統合検証はこれからです。Direct AR-XML loadingは引き続きL0 pathです。</p>
       </section>
 
       <section class="security-scope section-shell">
@@ -247,14 +247,14 @@
             <p>直接AR-XMLを取得する経路と、実ブラウザが持つ通常のネットワークセキュリティ境界を確認しています。</p>
           </article>
           <article class="security-next">
-            <span class="phase-badge planned">NEXT VALIDATION</span>
+            <span class="phase-badge development">IMPLEMENTING / NEXT VALIDATION</span>
             <small>L1 / RESOLUTION</small>
             <h2>Anchor<br />→ Resolver</h2>
-            <p>Canonical Entity Identityと現在のAR-XML Locationを分離し、HTTPS経由でRuntimeへ接続する流れを次に検証します。</p>
+            <p>Resolver Core 0.1とReference Resolverを基礎に、Canonical Entity Identityと現在のDescription Locationを分離し、HTTPS経由でRuntimeへ接続する流れを次に検証します。</p>
             <div class="security-flow">Anchor → Resolver → Canonical Entity Identity → AR-XML Location → HTTPS → Runtime</div>
           </article>
         </div>
-        <p class="security-note">署名付きMetadata、Trust Chain、Certificationは未実装のFuture workです。</p>
+        <p class="security-note">Manifest 0.1のoptional integrity metadataはTrustやAuthenticationを確立しません。署名、Trust Chain、CertificationはFuture workです。</p>
       </section>
 
 
@@ -336,11 +336,11 @@
 
       <section id="roadmap" class="roadmap section-shell">
         <div class="section-index light">09 / ROADMAP</div>
-        <div class="roadmap-head"><div><p class="kicker coral">FROM BASELINE TO RESOLUTION</p><h2>次はRELink固有の<br />Resolver層へ。</h2></div><p>Draft 4の代表的な実装経路を実ブラウザで確認する段階を完了し、次はAnchorからCanonical Entity IdentityとAR-XML Locationを解決するL1統合へ進みます。</p></div>
+        <div class="roadmap-head"><div><p class="kicker coral">RESOLUTION IN PROGRESS</p><h2>Resolver仕様から、<br />L1の実装検証へ。</h2></div><p>Resolver／Manifest 0.1仕様群を実装・Testbedへ引き渡すbaselineとしてFrozenし、Reference ResolverとL1外部統合の検証へ進んでいます。</p></div>
         <div class="milestones">
           <article class="milestone active completed"><span class="status">COMPLETED</span><div class="milestone-id">M1</div><h3>Draft 4 Baseline</h3><p>Web Runtime、Testbed、Test Harnessを接続し、代表経路を実ブラウザで検証。</p><ul><li>Core Draft 4</li><li>GET / POST / CORS</li><li>Result / Error Mapping</li></ul></article>
           <article class="milestone active completed"><span class="status">COMPLETED</span><div class="milestone-id">M2</div><h3>Independent Testbed</h3><p>決定論的なfixture、protocol scenario、観測をRuntimeから独立して提供。</p><ul><li>Draft 4 Fixtures</li><li>Protocol Scenarios</li><li>Browser Harness</li></ul></article>
-          <article class="milestone next"><span class="status">NEXT</span><div class="milestone-id">M3</div><h3>Resolver MVP / L1</h3><p>AnchorからResolverを経て、Canonical Entity IdentityとLocationを分離する。</p><ul><li>Resolver MVP</li><li>Identity ≠ Location</li><li>HTTPS L1 Integration</li></ul></article>
+          <article class="milestone next"><span class="status">IN PROGRESS</span><div class="milestone-id">M3</div><h3>Resolver MVP / L1</h3><p>Frozen 0.1仕様を基礎にReference Resolverを実装し、L1経路をTestbedとWeb Runtimeへ接続する。</p><ul><li>Core / Lifecycle / Manifest Frozen</li><li>Apache / PHP / SQLite Reference</li><li>HTTPS L1 Integration Next</li></ul></article>
           <article class="milestone"><span class="status">PLANNED</span><div class="milestone-id">M4</div><h3>Trust &amp; Expansion</h3><p>Resolver検証後にTrust metadataと第二Runtimeによる共通意味モデルを検討する。</p><ul><li>Signed Metadata</li><li>Trust Chain</li><li>Second Runtime</li></ul></article>
         </div>
       </section>
@@ -350,8 +350,15 @@
           <div class="section-index">10 / EXPLORE THE PROJECT</div>
           <p class="kicker">OPEN BY DESIGN</p>
           <h2>説明の次は、<br />動く実装と仕様へ。</h2>
-          <p>Draft 4の代表的な処理経路は実ブラウザで確認済みです。公開している仕様、Runtime、TestbedとHarnessの利用方法から、検証済みの範囲と次の課題を確認できます。</p>
+          <p>Draft 4の代表的な処理経路は実ブラウザで確認済みです。Resolverプロジェクトでは、Frozen 0.1仕様群とReference implementationを公開し、L1統合検証へ進んでいます。</p>
           <div class="project-grid">
+            <a class="project-card resolver-project" href="https://github.com/ranmaru50/relink-resolver" rel="noreferrer">
+              <span class="phase-badge development">SPEC FROZEN / IMPLEMENTING</span>
+              <small>NEW / RESOLVE</small>
+              <h3>RELink Resolver</h3>
+              <p>Resolver Core、Lifecycle、Manifest、Conformance Catalog、Web Runtime Integration ContractのFrozen 0.1 baselineと、Apache・PHP・SQLiteのReference implementation。</p>
+              <b>Explore resolver project ↗</b>
+            </a>
             <a class="project-card" href="https://github.com/ranmaru50/relink-web-runtime" rel="noreferrer">
               <span class="phase-badge implemented">BASELINE IMPLEMENTED</span>
               <small>01 / EXECUTE</small>
