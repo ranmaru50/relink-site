@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="照明と室温を例に、RELink Resolver、AR-XML、Web Runtime、通常のWeb APIを組み合わせてスマート家電制御を構築する技術ガイドです。" />
+    <meta name="theme-color" content="#071b2b" />
+    <link rel="canonical" href="https://ranmaru50.github.io/relink-site/smart-home.html" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="RELink" />
+    <meta property="og:title" content="RELinkで構築するスマート家電制御" />
+    <meta property="og:description" content="照明と室温を例に、Physical EntityをWeb上のCapabilityとして操作するまで。" />
+    <meta property="og:url" content="https://ranmaru50.github.io/relink-site/smart-home.html" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="RELinkで構築するスマート家電制御" />
+    <meta name="twitter:description" content="Resolver、AR-XML、Web Runtime、Capability APIの責務を具体例で解説。" />
+    <title>RELinkで構築するスマート家電制御</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="smart-home.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body class="guide-page">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="RELink ホーム">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>RELink</span>
+      </a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" aria-label="ページナビゲーション">
+        <a href="#architecture">Architecture</a>
+        <a href="#description">AR-XML</a>
+        <a href="#runtime">Runtime</a>
+        <a href="#security">Security</a>
+        <a class="nav-cta" href="index.html">Project site ↗</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="guide-hero section-shell">
+        <div class="eyebrow"><span>TECHNICAL GUIDE / 01</span><span>DRAFT 4 · L0 NOW / L1 NEXT</span></div>
+        <div class="guide-hero-grid">
+          <div>
+            <p class="kicker">BUILD A SMART HOME WITH RELINK</p>
+            <h1>RELinkで構築する<br /><em>スマート家電制御</em></h1>
+            <p class="guide-lead">照明と室温を例に、現実空間のEntityをWeb上のCapabilityとして発見し、人やApplicationの明示的な操作で実行するまでを解説します。</p>
+          </div>
+          <aside class="guide-thesis">
+            <small>DESIGN THESIS</small>
+            <strong>ARのためにWebを作り直さない。<br />Webの上に現実空間を参加させる。</strong>
+            <div class="maturity-flow" aria-label="Physical Entityが操作可能になるまで">
+              <span>Physical Entity</span><i>→</i><span>Addressable</span><i>→</i><span>Discoverable</span><i>→</i><span>Interactable</span><i>→</i><b>Operable</b>
+            </div>
+          </aside>
+        </div>
+        <div class="guide-status"><span>CURRENT BOUNDARY</span><p>Web RuntimeのL0 / Direct AR-XML pathは代表経路を実ブラウザで検証済み。Resolver-mediated L1 integrationは実装・検証中です。</p></div>
+      </section>
+
+      <section id="architecture" class="guide-architecture section-shell">
+        <div class="section-index light">01 / SYSTEM ARCHITECTURE</div>
+        <div class="guide-section-head">
+          <div><p class="kicker mint">FROM ANCHOR TO DEVICE</p><h2>解決と記述と実行を、<br />別の責務としてつなぐ。</h2></div>
+          <p>Resolverは機器を操作しません。AR-XMLはUIではありません。Runtimeは勝手に実行しません。既存のHTTPS APIが最後に機器を制御します。</p>
+        </div>
+
+        <div class="architecture-diagram" aria-label="スマートホームにおけるRELinkのアーキテクチャ">
+          <div class="diagram-column source-column">
+            <div class="diagram-node"><small>PHYSICAL ENTRY</small><strong>QR / NFC</strong></div>
+            <i>↓</i>
+            <div class="diagram-node"><small>PUBLIC IDENTIFIER</small><strong>Anchor URL</strong></div>
+          </div>
+          <i class="diagram-arrow">→</i>
+          <div class="diagram-column">
+            <div class="diagram-node resolver-node"><small>RESOLUTION</small><strong>Resolver</strong><span>UUID → 303</span></div>
+            <i>↓</i>
+            <div class="diagram-node"><small>DESCRIPTION</small><strong>AR-XML</strong><span>Entity · Capability · Interface</span></div>
+          </div>
+          <i class="diagram-arrow">→</i>
+          <div class="diagram-column">
+            <div class="diagram-node"><small>INTERPRETATION</small><strong>Web Runtime</strong><span>load · validate · expose</span></div>
+            <i>↓</i>
+            <div class="diagram-node application-node"><small>USER INTENT</small><strong>Web Application</strong><span>UI · policy · explicit invoke</span></div>
+          </div>
+          <i class="diagram-arrow">→</i>
+          <div class="api-branch">
+            <div class="diagram-node"><small>HTTP API</small><strong>Light API</strong><span>→ Light / Relay</span></div>
+            <div class="diagram-node"><small>HTTP API</small><strong>Temperature API</strong><span>→ Sensor / HVAC</span></div>
+          </div>
+        </div>
+
+        <p class="diagram-boundary"><span>IMPORTANT</span>Resolverの出力はAR-XML Description Locationです。Capability APIやdevice IPを選択せず、AR-XMLを解析・実行することもありません。</p>
+
+        <div class="separation-grid">
+          <article><span>01</span><strong>Entity ≠ Location</strong><p>部屋や照明のCanonical Identityと、現在のAR-XML URLを分けます。</p></article>
+          <article><span>02</span><strong>Capability ≠ Interface</strong><p>「照明を切り替える」という意味と、POST endpointを分けます。</p></article>
+          <article><span>03</span><strong>Description ≠ Execution</strong><p>AR-XMLを取得しても機器操作は発生しません。</p></article>
+          <article><span>04</span><strong>Resolution ≠ Authentication</strong><p>303で到達できても操作権限を得たことにはなりません。</p></article>
+        </div>
+      </section>
+
+      <section id="scenario" class="scenario section-shell">
+        <div class="section-index">02 / SCENARIO</div>
+        <div class="guide-section-head ink-head">
+          <div><p class="kicker">ONE ROOM, TWO ENTITIES</p><h2>照明を点け、室温を読み、<br />目標温度を設定する。</h2></div>
+          <p>Web Applicationは発見したCapabilityを画面へ提示し、利用者の操作を受けて初めて`invoke`します。</p>
+        </div>
+
+        <div class="room-model">
+          <article>
+            <small>ENTITY / A</small><h3>Smart Light</h3>
+            <ul><li><code>light.getState</code><small>local id: get-light-state</small></li><li><code>light.setState</code><small>local id: set-light</small></li><li><code>light.setBrightness</code><small>local id: set-brightness</small></li></ul>
+          </article>
+          <article>
+            <small>ENTITY / B</small><h3>Temperature Controller</h3>
+            <ul><li><code>temperature.getCurrent</code><small>local id: get-temperature</small></li><li><code>temperature.setTarget</code><small>local id: set-target-temperature</small></li></ul>
+          </article>
+        </div>
+
+        <ol class="scenario-steps">
+          <li><span>01</span><p>部屋のQRまたはNFCからAnchor URLを得る。</p></li>
+          <li><span>02</span><p>ResolverがUUIDを現在のAR-XML Description Locationへ303で解決する。</p></li>
+          <li><span>03</span><p>Web RuntimeがAR-XMLを取得・解析・検証し、CapabilityをApplicationへ公開する。</p></li>
+          <li><span>04</span><p>Web Applicationが照明と温度の操作を表示する。</p></li>
+          <li><span>05</span><p>ユーザーが「Light ON」を選ぶ。</p></li>
+          <li><span>06</span><p>Applicationが`light.setState`を明示的にinvokeする。</p></li>
+          <li><span>07</span><p>Runtimeが宣言済みHTTP Interfaceを呼び、API側が認可して照明を制御する。</p></li>
+          <li><span>08</span><p>温度取得と目標温度設定も同じ責務分離で実行する。</p></li>
+        </ol>
+      </section>
+
+      <section id="resolver" class="resolver-guide section-shell">
+        <div class="section-index">03 / RESOLVER</div>
+        <div class="guide-section-head ink-head">
+          <div><p class="kicker">IDENTITY → LOCATION</p><h2>Resolverは、現在の<br />Descriptionへ案内する。</h2></div>
+          <p>Resolver Core 0.1のL1はpublic、GET-only、read-only、HTTPS-basedです。通常のL1解決にManifestは必須ではありません。</p>
+        </div>
+        <div class="resolver-example">
+          <div><small>ANCHOR / RESOLVER URL</small><code>https://resolver.example/relink/<wbr />550e8400-e29b-41d4-a716-446655440000</code></div>
+          <i>303 See Other</i>
+          <div><small>LOCATION</small><code>https://home.example/arxml/<wbr />living-room.xml</code></div>
+        </div>
+        <div class="resolver-boundaries">
+          <div><small>RESOLVER DOES</small><strong>UUID lookup</strong><strong>Lifecycle mapping</strong><strong>HTTPS Location response</strong></div>
+          <div><small>RESOLVER DOES NOT</small><strong>照明ON / OFF</strong><strong>温度取得・API選択</strong><strong>AR-XML parse / Capability invoke</strong></div>
+        </div>
+      </section>
+
+      <section id="description" class="description-guide section-shell">
+        <div class="section-index light">04 / ENTITY DESCRIPTION</div>
+        <div class="guide-section-head">
+          <div><p class="kicker mint">AR-XML CORE DRAFT 4</p><h2>意味的なCapabilityと、<br />HTTP Interfaceを記述する。</h2></div>
+          <p>AR-XMLはEntity Interface Description Languageです。画面のボタンや自動化条件、機器側の実装コードは記述しません。</p>
+        </div>
+
+        <div class="code-explainer">
+          <div class="guide-code-caption"><span>LIGHT / SET STATE</span><b>POST JSON · NO OUTPUT</b></div>
+          <pre class="guide-code"><code>&lt;ar-entity
+  xmlns="https://relink.dev/ns/arxml/core/0.1"
+  version="0.1"&gt;
+  &lt;category&gt;home.room&lt;/category&gt;
+  &lt;capabilities&gt;
+    &lt;capability
+      id="set-light"
+      type="https://example.org/capabilities/light/set-state/1"&gt;
+      &lt;inputs&gt;
+        &lt;input name="on" type="boolean" required="true" /&gt;
+      &lt;/inputs&gt;
+      &lt;result&gt;
+        &lt;representations&gt;
+          &lt;representation media-type="application/json" /&gt;
+        &lt;/representations&gt;
+      &lt;/result&gt;
+      &lt;interfaces&gt;
+        &lt;interface
+          type="http"
+          method="POST"
+          endpoint="../api/light/state"
+          encoding="json" /&gt;
+      &lt;/interfaces&gt;
+    &lt;/capability&gt;
+  &lt;/capabilities&gt;
+&lt;/ar-entity&gt;</code></pre>
+        </div>
+
+        <div class="code-explainer second-code">
+          <div class="guide-code-caption"><span>TEMPERATURE / GET CURRENT</span><b>GET · MULTI-OUTPUT JSON</b></div>
+          <pre class="guide-code"><code>&lt;capability
+  id="get-temperature"
+  type="https://example.org/capabilities/temperature/get-current/1"&gt;
+  &lt;result&gt;
+    &lt;outputs&gt;
+      &lt;output name="temperature" type="number" unit="Cel" /&gt;
+      &lt;output name="timestamp" type="string" format="date-time" /&gt;
+    &lt;/outputs&gt;
+    &lt;representations&gt;
+      &lt;representation media-type="application/json" /&gt;
+    &lt;/representations&gt;
+  &lt;/result&gt;
+  &lt;interfaces&gt;
+    &lt;interface
+      type="http"
+      method="GET"
+      endpoint="../api/temperature" /&gt;
+  &lt;/interfaces&gt;
+&lt;/capability&gt;</code></pre>
+        </div>
+
+        <div class="capability-interface">
+          <article><small>CAPABILITY / WHAT</small><strong>照明をON / OFFできる</strong><code>https://example.org/capabilities/light/set-state/1</code></article>
+          <i>≠</i>
+          <article><small>INTERFACE / HOW</small><strong>HTTP POSTで呼び出す</strong><code>https://home.example/api/light/state</code></article>
+        </div>
+        <p class="dark-note">Capability semanticsはInterfaceから独立しています。将来別のBindingを追加しても、「照明状態を変更する」という意味的Contractは維持できます。</p>
+      </section>
+
+      <section class="relative-url section-shell">
+        <div class="section-index">05 / RELATIVE INTERFACE URL</div>
+        <div class="guide-section-head ink-head">
+          <div><p class="kicker">STANDARD URL RESOLUTION</p><h2>基準はWeb Appではなく、<br />最終AR-XML URL。</h2></div>
+          <p>相対Interface endpointは、Redirect処理後の最終AR-XML Document URLをbaseとして標準URL resolutionで解決します。</p>
+        </div>
+        <div class="url-equation">
+          <div><small>FINAL AR-XML DOCUMENT URL</small><code>https://home.example/arxml/living-room.xml</code></div>
+          <b>+</b>
+          <div><small>RELATIVE INTERFACE</small><code>../api/light/state</code></div>
+          <b>=</b>
+          <div class="url-result"><small>RESOLVED INTERFACE URL</small><code>https://home.example/api/light/state</code></div>
+        </div>
+        <p class="url-warning">Host Web Application URL、元のAnchor URL、Resolver URLをbaseにしてはいけません。現行Web RuntimeのL0 APIはDescription URLを直接受け取り、この規則でendpointを解決します。L1で最終Redirect URLを引き渡す統合は次の検証対象です。</p>
+      </section>
+
+      <section id="runtime" class="runtime-guide section-shell">
+        <div class="section-index light">06 / WEB RUNTIME</div>
+        <div class="guide-section-head">
+          <div><p class="kicker mint">IMPLEMENTATION UNDER CONTROL</p><h2>Runtimeは公開する。<br />Applicationが実行を決める。</h2></div>
+          <p>現在の公開APIに合わせたL0例です。`load`はAR-XMLを読み込みますが、Capabilityを自動実行しません。</p>
+        </div>
+        <div class="runtime-pipeline" aria-label="Web Runtimeの処理段階">
+          <span>load AR-XML</span><i>→</i><span>parse</span><i>→</i><span>validate</span><i>→</i><span>evaluate</span><i>→</i><strong>expose Capability</strong>
+        </div>
+        <div class="code-explainer runtime-code-block">
+          <div class="guide-code-caption"><span>CURRENT PUBLIC API / L0</span><b>EXPLICIT INVOCATION</b></div>
+          <pre class="guide-code"><code>const runtime = new ARRuntime();
+
+// 現行baselineでは最終Description URLを直接渡す。
+const document = await runtime.load(
+  "https://home.example/arxml/living-room.xml"
+);
+
+const light = document.getCapability("set-light");
+if (!light) throw new Error("Capability not found");
+
+// Human / Applicationの意思決定後にだけ実行する。
+await light.invoke({ on: true });</code></pre>
+        </div>
+        <div class="intent-chain"><span>Human</span><i>↓</i><span>Web Application</span><i>↓</i><span>Web Runtime</span><i>↓</i><span>Capability</span><i>↓</i><span>HTTP Interface</span><i>↓</i><strong>Device / Gateway</strong></div>
+      </section>
+
+      <section id="api" class="api-guide section-shell">
+        <div class="section-index">07 / CAPABILITY API</div>
+        <div class="guide-section-head ink-head">
+          <div><p class="kicker">ORDINARY WEB APIs</p><h2>機器制御には、通常の<br />HTTPS APIを使う。</h2></div>
+          <p>Capability APIはRELink固有protocolではありません。RELinkはWeb APIを置き換えず、意味と発見可能性を追加します。</p>
+        </div>
+        <div class="api-examples">
+          <article><small>LIGHT ON</small><pre><code>POST /api/light/state
+Content-Type: application/json
+
+{ "on": true }
+
+→ 204 No Content</code></pre></article>
+          <article><small>CURRENT TEMPERATURE</small><pre><code>GET /api/temperature
+
+→ 200 application/json
+{
+  "temperature": 24.6,
+  "timestamp": "2026-09-02T12:00:00Z"
+}</code></pre></article>
+          <article><small>TARGET TEMPERATURE</small><pre><code>POST /api/temperature/target
+Content-Type: application/json
+
+{ "target": 22 }
+
+→ 204 No Content</code></pre></article>
+        </div>
+        <blockquote>RELink does not replace Web APIs. <strong>RELink describes and discovers them.</strong></blockquote>
+      </section>
+
+      <section id="deployment" class="deployment-guide section-shell">
+        <div class="section-index">08 / PHYSICAL DEPLOYMENT</div>
+        <div class="guide-section-head ink-head">
+          <div><p class="kicker">SMALL REAL-WORLD SETUP</p><h2>Webの先で、Gatewayが<br />現実の機器を動かす。</h2></div>
+          <p>家庭内ルータへの受信ポート開放を前提にしません。Capability APIはHTTPS Gateway、VPN、またはローカル到達性ポリシーの内側へ配置します。</p>
+        </div>
+        <div class="deployment-diagram">
+          <div><small>PUBLIC WEB</small><strong>Resolver / AR-XML Server</strong></div><i>HTTPS</i>
+          <div><small>CONSUMER</small><strong>Web Browser + Runtime</strong></div><i>HTTPS / POLICY</i>
+          <div><small>CAPABILITY EDGE</small><strong>Gateway / Raspberry Pi</strong></div>
+          <div class="device-split"><span>GPIO → LED / Relay → Light</span><span>Sensor / HVAC Controller</span></div>
+        </div>
+        <div class="deployment-option"><small>OPTIONAL PRIVATE PATH</small><strong>Raspberry Pi → WireGuard → VPS Capability Gateway</strong><p>外部公開Gatewayから家庭内機器へ、明示的に管理されたprivate tunnelで到達する構成例です。</p></div>
+      </section>
+
+      <section id="security" class="guide-security section-shell">
+        <div class="section-index light">09 / SECURITY &amp; RESPONSIBILITY</div>
+        <div class="guide-section-head">
+          <div><p class="kicker mint">DISCOVERY IS NOT AUTHORITY</p><h2>見つけられることと、<br />操作できることを分ける。</h2></div>
+          <p>PublicなAnchor UUIDやResolution成功は、制御権限の証明ではありません。最終的な操作認可はCapability API側で必ず行います。</p>
+        </div>
+        <div class="security-equations">
+          <div><span>Anchor URL</span><b>≠</b><strong>authorization credential</strong></div>
+          <div><span>Resolver resolution</span><b>≠</b><strong>authentication</strong></div>
+          <div><span>AR-XML load success</span><b>≠</b><strong>permission to control</strong></div>
+          <div><span>Capability discovery</span><b>≠</b><strong>execution authorization</strong></div>
+        </div>
+        <div class="responsibility-cards">
+          <article><small>RUNTIME</small><h3>Capabilityを公開</h3><p>AR-XMLを検証し、AvailabilityとInterfaceをApplicationへ提示。HTTPS、CORS、mixed-content、Runtime network policyに従います。</p></article>
+          <article><small>APPLICATION</small><h3>UIとPolicyを判断</h3><p>Light ON、Brightness 50%、Target 22°Cなどを誰にいつ提示し、どの操作をinvokeするか決定します。</p></article>
+          <article><small>BACKEND</small><h3>最終認証・認可</h3><p>Authentication、Authorization、Application policyを強制し、許可された要求だけをDeviceへ渡します。</p></article>
+        </div>
+      </section>
+
+      <section id="automation" class="automation-guide section-shell">
+        <div class="section-index">10 / APPLICATION AUTOMATION</div>
+        <div class="guide-section-head ink-head">
+          <div><p class="kicker">ONE EXPLICIT RULE</p><h2>自動化するのはRuntimeではなく、<br />Automation Application。</h2></div>
+          <p>Applicationが温度を取得し、自身の条件式で判断したあと、別のCapabilityを明示的にinvokeします。</p>
+        </div>
+        <div class="automation-flow"><span>Application</span><i>→</i><span>temperature.getCurrent</span><i>→</i><span>28°C</span><i>→</i><span>if temperature &gt; 27</span><i>→</i><strong>temperature.setTarget(24)</strong></div>
+        <pre class="automation-code"><code>const reading = document.getCapability("get-temperature");
+const target = document.getCapability("set-target-temperature");
+if (!reading || !target) throw new Error("Capability not found");
+
+const result = await reading.invoke({});
+
+// 判断主体はApplication。Runtimeは条件を発明しない。
+if (Number(result.values.temperature) &gt; 27) {
+  await target.invoke({ target: 24 });
+}</code></pre>
+      </section>
+
+      <section class="comparison-guide section-shell">
+        <div class="section-index">11 / POSITIONING</div>
+        <div class="comparison-grid">
+          <article><small>DEVICE-SPECIFIC INTEGRATION</small><div>Device-specific App <i>→</i> Vendor-specific API <i>→</i> Device</div></article>
+          <article><small>RELINK LAYER</small><div>Entity <i>→</i> AR-XML <i>→</i> Semantic Capability <i>→</i> Web Interface <i>→</i> Application</div></article>
+        </div>
+        <p>RELinkは既存のIoT標準やdevice protocolを置き換えるものではありません。Identity、Discovery、Interface Description、Interaction Entry PointをWeb上に追加する層です。</p>
+      </section>
+
+      <section class="guide-summary section-shell">
+        <p class="kicker">FROM PHYSICAL TO WEB-ADDRESSABLE</p>
+        <h2>Smart LightもTemperature Controllerも、<br />Webから見れば<em>操作可能なEntity</em>になる。</h2>
+        <p>RELinkが追加するのは、新しい制御protocolではありません。</p>
+        <div class="summary-link"><span>Physical Entity</span><i>→</i><strong>Web-addressable Entity</strong></div>
+        <div class="summary-actions">
+          <a class="button primary" href="https://github.com/ranmaru50/relink-web-runtime" rel="noreferrer">Web Runtime ↗</a>
+          <a class="button secondary" href="https://github.com/ranmaru50/relink-resolver" rel="noreferrer">Resolver ↗</a>
+          <a class="button secondary" href="https://github.com/ranmaru50/relink-web-runtime/blob/main/docs/specs/arxml-core-0.1-draft4.md" rel="noreferrer">AR-XML Draft 4 ↗</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>RELink</span></a>
+      <p>Technical guide — Smart Home with RELink</p>
+      <a href="#top">Back to top ↑</a>
+    </footer>
+  </body>
+</html>

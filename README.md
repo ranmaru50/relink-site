@@ -10,6 +10,10 @@ Resolver Core 0.1、Resolver Lifecycle 0.1、Manifest 0.1、Conformance Catalog 
 
 **https://ranmaru50.github.io/relink-site/**
 
+Technical guide:
+
+**https://ranmaru50.github.io/relink-site/smart-home.html**
+
 ## Local preview
 
 依存パッケージはありません。リポジトリのルートを任意の静的HTTPサーバで配信してください。
@@ -40,6 +44,8 @@ python3 -m http.server 8080
 
 - `index.html` — サイト本文
 - `styles.css` — レスポンシブデザイン
+- `smart-home.html` — 照明と室温を題材にしたRELink技術解説
+- `smart-home.css` — 技術解説ページ固有の図・コード・レスポンシブデザイン
 - `script.js` — モバイルナビゲーション
 
 ## Related projects
