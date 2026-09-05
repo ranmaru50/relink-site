@@ -4,7 +4,7 @@ RELink（Real Entity Link）の考え方、アーキテクチャ、想定ユー�
 
 AR-XML Core Draft 4を基礎とするWeb Runtime baseline、独立したRELink Testbed、Web Runtime Test Harnessを接続し、代表的な処理経路を実ブラウザ環境で検証済みです。確認範囲は、今回実行した代表ケースに限定されます。
 
-Resolver Core 0.1、Resolver Lifecycle 0.1、Manifest 0.1、Conformance Catalog 0.1、Web Runtime Integration Contract 0.1等はFrozen baselineとなり、Reference Resolverの実装が始まっています。現在の次段階は、HTTPSベースのL1外部統合検証です。
+Resolver Core 0.1、Resolver Lifecycle 0.1、Manifest 0.1、Conformance Catalog 0.1、Web Runtime Integration Contract 0.1等はFrozen baselineです。Reference ResolverのApache・PHP・SQLite実装と受入fixtureが整備され、現在はHTTPSベースのL1外部受入・統合検証へ進んでいます。
 
 ## Website
 
@@ -13,6 +13,14 @@ Resolver Core 0.1、Resolver Lifecycle 0.1、Manifest 0.1、Conformance Catalog 
 Technical guide:
 
 **https://ranmaru50.github.io/relink-site/smart-home.html**
+
+English site:
+
+**https://ranmaru50.github.io/relink-site/en/**
+
+English technical guide:
+
+**https://ranmaru50.github.io/relink-site/en/smart-home.html**
 
 ## Local preview
 
@@ -46,6 +54,8 @@ python3 -m http.server 8080
 - `styles.css` — レスポンシブデザイン
 - `smart-home.html` — 照明と室温を題材にしたRELink技術解説
 - `smart-home.css` — 技術解説ページ固有の図・コード・レスポンシブデザイン
+- `en/index.html` — English project overview
+- `en/smart-home.html` — English technical guide
 - `script.js` — モバイルナビゲーション
 
 ## Editing policy
