@@ -42,7 +42,7 @@
 
     <main id="top">
       <section class="guide-hero section-shell">
-        <div class="eyebrow"><span>TECHNICAL GUIDE / 01</span><span>DRAFT 4 · L0 NOW / L1 NEXT</span></div>
+        <div class="eyebrow"><span>TECHNICAL GUIDE / 01</span><span>DRAFT 4 · L0 / L1 BASELINE</span></div>
         <div class="guide-hero-grid">
           <div>
             <p class="kicker">BUILD A SMART HOME WITH RELINK</p>
@@ -57,7 +57,7 @@
             </div>
           </aside>
         </div>
-        <div class="guide-status"><span>CURRENT BOUNDARY</span><p>Web RuntimeのL0 / Direct AR-XML pathに加え、Resolver・Manifest URLからの文書ロードを実装し、代表経路を実ブラウザで検証済み。Resolver-mediated L1の外部受入・統合検証は継続中です。</p></div>
+        <div class="guide-status"><span>CURRENT BOUNDARY</span><p>Web RuntimeのL0 / Direct AR-XML pathとResolver・Manifest URLからの文書ロードを実装し、代表経路を実ブラウザで検証済み。Resolver-mediated L1の実装baselineとNative / Container受入証拠を整備し、広い外部統合・実機検証は継続中です。</p></div>
       </section>
 
       <section id="architecture" class="guide-architecture section-shell">
@@ -230,7 +230,7 @@
           <b>=</b>
           <div class="url-result"><small>RESOLVED INTERFACE URL</small><code>https://home.example/api/light/state</code></div>
         </div>
-        <p class="url-warning">Host Web Application URL、元のAnchor URL、Resolver URLをbaseにしてはいけません。現行Web RuntimeのL0 APIはDescription URLを直接受け取り、この規則でendpointを解決します。L1で最終Redirect URLを引き渡す統合は次の検証対象です。</p>
+        <p class="url-warning">Host Web Application URL、元のAnchor URL、Resolver URLをbaseにしてはいけません。現行Web RuntimeはL0のDescription URLとL1のResolver URLを扱い、最終AR-XML URLをbaseにendpointを解決します。より広いL1外部統合は引き続き検証対象です。</p>
       </section>
 
       <section id="runtime" class="runtime-guide section-shell">

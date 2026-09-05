@@ -2,9 +2,9 @@
 
 RELink（Real Entity Link）の考え方、アーキテクチャ、想定ユースケース、開発ロードマップを紹介するプロジェクトサイトです。
 
-AR-XML Core Draft 4を基礎とするWeb Runtime baseline、独立したRELink Testbed、Web Runtime Test Harnessを接続し、代表的な処理経路を実ブラウザ環境で検証済みです。確認範囲は、今回実行した代表ケースに限定されます。
+AR-XML Core Draft 4を基礎とするWeb Runtime baseline、独立したRELink Testbed、Web Runtime Test Harnessを接続し、代表的な処理経路を実ブラウザ環境で検証済みです。Resolver Core 0.1 L1のReference ResolverとWeb Runtimeロード経路も実装し、Native / ContainerのResolver受入結果をTestbedで記録しています。確認範囲は適用対象の代表ケースに限定されます。
 
-Resolver Core 0.1、Resolver Lifecycle 0.1、Manifest 0.1、Conformance Catalog 0.1、Web Runtime Integration Contract 0.1等はFrozen baselineです。Reference ResolverのApache・PHP・SQLite実装と受入fixtureが整備され、現在はHTTPSベースのL1外部受入・統合検証へ進んでいます。
+Resolver Core 0.1、Resolver Lifecycle 0.1、Manifest 0.1、Conformance Catalog 0.1、Web Runtime Integration Contract 0.1等はFrozen baselineです。Reference ResolverのApache・PHP・SQLite実装、Web RuntimeのResolver-mediated L1ロード、Native / ContainerのResolver受入結果が整備されています。次はTrust / L2設計、より広い統合・実機検証です。
 
 ## Website
 
@@ -135,6 +135,18 @@ AR-XML retrieval
 ```
 
 `Representative E2E PASS` は、仕様上のすべての処理経路を検証したという意味ではありません。
+
+現在の実装baseline:
+
+```text
+L0  Direct AR-XML loading        IMPLEMENTED
+L1  Resolver-mediated loading    IMPLEMENTED
+    Reference Resolver            IMPLEMENTED
+    Native / Container evidence   RECORDED
+L2  Resolution authenticity       PLANNED / DESIGN
+```
+
+Native / Containerの受入結果は適用対象のResolver-side targetに限定されます。すべてのカタログtarget、すべてのL1 Consumer動作、Production certificationを意味しません。
 
 ## License
 
