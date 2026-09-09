@@ -1,10 +1,10 @@
 # RELink Site
 
-RELink（Real Entity Link）の考え方、アーキテクチャ、想定ユースケース、開発ロードマップを紹介するプロジェクトサイトです。
+RELink（Real Entity Link）の目的、既存技術との関係、Reference Lab、実装状況を紹介するプロジェクトサイトです。
 
-AR-XML Core Draft 4を基礎とするWeb Runtime baseline、独立したRELink Testbed、Web Runtime Test Harnessを接続し、代表的な処理経路を実ブラウザ環境で検証済みです。Resolver Core 0.1 L1のReference ResolverとWeb Runtimeロード経路も実装し、Native / ContainerのResolver受入結果をTestbedで記録しています。確認範囲は適用対象の代表ケースに限定されます。
+RELinkはIoT transportやWeb APIを置き換える仕様ではありません。Physical Anchorから現在のEntity Description、Capability、既存のInterfaceへ到達する共通の発見経路を扱います。HTTP(S)、WoT、BLE、MQTT、OPC UA、GS1、vendor-specific APIなどは、それぞれの得意分野で引き続き利用できます。
 
-Resolver Core 0.1、Resolver Lifecycle 0.1、Manifest 0.1、Conformance Catalog 0.1、Web Runtime Integration Contract 0.1等はFrozen baselineです。Reference ResolverのApache・PHP・SQLite実装、Web RuntimeのResolver-mediated L1ロード、Native / ContainerのResolver受入結果が整備されています。次はTrust / L2設計、より広い統合・実機検証です。
+現在は、Resolver Core 0.1 L1、AR-XML Core 0.1 Draft 4のWeb Runtime 0.1.0、独立したTestbed、Pico 2 W Reference Labを公開しています。Reference Labは、Resolver-mediated loading、明示的なCapability invocation、PicoのLED ON/OFF、RP2350内部温度読み取りを含む最小L1参照経路です。L2 / Trust、production authorization、全仕様への完全準拠はこの範囲に含みません。
 
 ## Website
 
@@ -51,6 +51,7 @@ python3 -m http.server 8080
 ## Structure
 
 - `index.html` — サイト本文
+- `favicon.svg` — RELinkアイコン
 - `styles.css` — レスポンシブデザイン
 - `smart-home.html` — 照明と室温を題材にしたRELink技術解説
 - `smart-home.css` — 技術解説ページ固有の図・コード・レスポンシブデザイン
@@ -116,6 +117,7 @@ Resolution ≠ Authentication
 - [relink-web-runtime](https://github.com/ranmaru50/relink-web-runtime)
 - [relink-testbed](https://github.com/ranmaru50/relink-testbed)
 - [relink-resolver](https://github.com/ranmaru50/relink-resolver)
+- [relink-reference-lab](https://github.com/ranmaru50/relink-reference-lab)
 - [Web Runtime Test Harness usage](https://github.com/ranmaru50/relink-web-runtime#web-runtime-test-harness)
 - [AR-XML Core 0.1 Draft 4](https://github.com/ranmaru50/relink-web-runtime/blob/main/docs/specs/arxml-core-0.1-draft4.md)
 

@@ -3,419 +3,106 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="RELinkは、現実世界のエンティティをWeb上の能力として発見・理解・実行可能にするためのオープンなアーキテクチャです。Resolver Core 0.1 L1の実装baselineとNative / Container受入証拠を整備し、Trust / L2設計と広い統合検証へ進んでいます。" />
+    <meta name="description" content="RELinkは、目の前の物理Entityが何者で何ができ、どのInterfaceから利用できるかを、人間と機械がWeb経由で発見できるようにする共通経路です。" />
     <meta name="theme-color" content="#071b2b" />
     <link rel="canonical" href="https://ranmaru50.github.io/relink-site/" />
+    <link rel="alternate" hreflang="ja" href="https://ranmaru50.github.io/relink-site/" />
+    <link rel="alternate" hreflang="en" href="https://ranmaru50.github.io/relink-site/en/" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="RELink" />
-    <meta property="og:title" content="RELink — Real Entity Link" />
-    <meta property="og:description" content="Resolver Core 0.1 L1の実装baselineとNative / Container受入証拠を整備し、Trust / L2設計と広い統合検証へ。" />
+    <meta property="og:title" content="RELink — Physical Entity Discovery" />
+    <meta property="og:description" content="物理Entityから、現在のDescriptionとCapabilityへ到達する共通経路。既存のWeb APIやデバイスprotocolを置き換えません。" />
     <meta property="og:url" content="https://ranmaru50.github.io/relink-site/" />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="RELink — Real Entity Link" />
-    <meta name="twitter:description" content="現実世界を、理解できるWebへ。" />
-    <title>RELink — Real Entity Link</title>
+    <meta name="twitter:title" content="RELink — Physical Entity Discovery" />
+    <meta name="twitter:description" content="目の前にあるモノが、何者で何ができるかをWebから発見する。" />
+    <title>RELink — Physical Entity Discovery</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
   </head>
-  <body>
+  <body class="relink-home">
     <header class="site-header">
-      <a class="brand" href="#top" aria-label="RELink ホーム">
-        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span>RELink</span>
-      </a>
+      <a class="brand" href="#top" aria-label="RELink ホーム"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>RELink</span></a>
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
       <nav id="site-nav" aria-label="メインナビゲーション">
-        <a href="#concept">Concept</a>
-        <a href="#architecture">Architecture</a>
-        <a href="#validation">Validation</a>
-        <a class="guide-nav-link" href="smart-home.html">Guide ↗</a>
-        <a class="language-switch" href="en/index.html">English ↗</a>
-        <a href="#use-cases">Use cases</a>
-        <a href="#roadmap">Roadmap</a>
-        <a class="nav-cta" href="https://github.com/ranmaru50" rel="noreferrer">GitHub ↗</a>
+        <a href="#what">What</a><a href="#lab">Reference Lab</a><a href="#comparison">Comparison</a><a href="#how">How it works</a><a href="#projects">Projects</a><a class="guide-nav-link" href="smart-home.html">Guide ↗</a><a class="language-switch" href="en/index.html">English ↗</a>
       </nav>
     </header>
 
     <main id="top">
-      <section class="hero section-shell">
-        <div class="eyebrow"><span>OPEN ARCHITECTURE</span><span>RESOLVER 0.1 FROZEN · L1 BASELINE IMPLEMENTED</span></div>
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <p class="kicker">Real Entity Link</p>
-            <h1>現実世界を、<br /><em>理解できるWeb</em>へ。</h1>
-            <p class="lead">RELinkは、モノや設備、ロボットなどの現実のエンティティを、発見・理解・実行可能な能力としてWebへ接続するためのオープンなアーキテクチャです。</p>
-            <p class="lead-detail">AR-XML Core Draft 4のWeb Runtime baselineとResolver/Manifest URLからの文書ロードを実装し、代表経路を実ブラウザで検証しました。Resolver Core 0.1 L1のReference ResolverとWeb Runtimeロード経路、Native / Container受入証拠を整備し、Trust / L2設計と広い統合・実機検証へ進んでいます。</p>
-            <div class="hero-actions">
-              <a class="button primary" href="#arxml-example">AR-XMLを見る <span>↓</span></a>
-              <a class="button secondary guide-button" href="smart-home.html">Smart Home Guide <span>↗</span></a>
-            </div>
-          </div>
-
-          <div class="system-map" aria-label="RELinkの処理フロー">
-            <div class="map-label">SYSTEM / 01</div>
-            <div class="map-track" aria-hidden="true"><span></span></div>
-            <div class="map-node node-source">
-              <small>PHYSICAL</small>
-              <strong>Entity</strong>
-              <span>QR · NFC · URL · ID</span>
-            </div>
-            <div class="map-node node-resolver">
-              <small>IDENTITY</small>
-              <strong>Resolver</strong>
-              <span>Identity → Location</span>
-              <mark class="node-status development">L1 BASELINE IMPLEMENTED</mark>
-            </div>
-            <div class="map-node node-runtime">
-              <small>SEMANTICS</small>
-              <strong>Runtime</strong>
-              <span>Discover · Evaluate · Invoke</span>
-              <mark class="node-status experimental">L0 / L1 LOAD IMPLEMENTED</mark>
-            </div>
-            <div class="map-node node-capability">
-              <small>ACTION</small>
-              <strong>Capability</strong>
-              <span>HTTP · Native · Extensions</span>
-              <mark class="node-status experimental">DRAFT</mark>
-            </div>
-          </div>
-        </div>
-        <div class="hero-footnote"><span>VALIDATED SCOPE</span><p>Representative Draft 4 processing paths passed in a real browser. Coverage remains intentionally bounded to those paths.</p></div>
-      </section>
-
-      <section class="guide-entry section-shell" aria-labelledby="guide-entry-title">
-        <a class="guide-entry-card" href="smart-home.html">
-          <div class="guide-entry-meta"><span>NEW / TECHNICAL GUIDE</span><b>SEPARATE PAGE ↗</b></div>
-          <div class="guide-entry-body">
-            <div>
-              <p class="kicker">BUILD A SMART HOME WITH RELINK</p>
-              <h2 id="guide-entry-title">照明と室温で学ぶ、<br />RELinkの実装フロー。</h2>
-              <p>Resolver、AR-XML、Web Runtime、Application、通常のHTTPS APIが担う責務を、ひとつの部屋を例に順番に解説します。</p>
-            </div>
-            <div class="guide-entry-flow" aria-hidden="true">
-              <span>Resolver</span><i>→</i><span>AR-XML</span><i>→</i><span>Runtime</span><i>→</i><strong>Light / Temperature</strong>
-            </div>
-          </div>
-          <div class="guide-entry-cta"><span>Architecture diagram · Draft 4 XML · Runtime API · Security boundary</span><strong>Read the guide ↗</strong></div>
-        </a>
-      </section>
-
-      <section id="concept" class="manifesto section-shell">
-        <div class="section-index">01 / CONCEPT</div>
-        <div class="manifesto-grid">
-          <h2>リンクするのは、<br />ページではなく<em>能力</em>です。</h2>
-          <div class="manifesto-copy">
-            <p>今日のWebは「モノについてのページ」へリンクできます。しかし、そのモノが今何をできるか、どう呼び出すか、何が必要かまでは共通の方法で表現できません。</p>
-            <p>RELinkは、エンティティの意味と実行インターフェースを分離しながら結びます。アプリやエージェントは専用連携を知らなくても、能力を発見して適切な方法で実行できます。</p>
-          </div>
-        </div>
-        <div class="principle-grid">
-          <article><span>01</span><h3>Entity ≠ Location</h3><p>存在そのものの識別子と、現在の文書URLを分離します。</p></article>
-          <article><span>02</span><h3>Capability ≠ Interface</h3><p>「何ができるか」と「どう実行するか」を別の層として扱います。</p></article>
-          <article><span>03</span><h3>Semantics before Platform</h3><p>ブラウザ、ロボット、モバイルを越えて意味を共有します。</p></article>
-        </div>
-      </section>
-
-      <section id="architecture" class="architecture section-shell">
-        <div class="section-index light">02 / ARCHITECTURE</div>
-        <div class="architecture-head">
-          <div><p class="kicker mint">HOW IT WORKS</p><h2>小さな部品を、<br />明確な責務でつなぐ。</h2></div>
-          <p>RELinkは単一の巨大なサービスではありません。文書、実行環境、名前解決、試験基盤、Trustを独立させます。右端のstatusは、公開リポジトリで確認できる現在地です。</p>
-        </div>
-
-        <div class="architecture-legend" aria-label="開発状況の凡例">
-          <span><i class="legend-dot implemented"></i>実装が存在</span>
-          <span><i class="legend-dot development"></i>開発中</span>
-          <span><i class="legend-dot planned"></i>計画済み</span>
-          <span><i class="legend-dot future"></i>将来構想</span>
-        </div>
-
-        <div class="architecture-stack">
-          <article class="layer arxml"><span class="layer-no">A</span><div><small>ENTITY INTERFACE DESCRIPTION</small><h3>AR-XML</h3></div><p>EntityのCategory、Profiles、Capabilities、Inputs、Results、Requirements、Interfacesを記述する言語。UI記述ではありません。</p><b>Core 0.1 / Draft 4</b><span class="phase-badge experimental">DRAFT / STABILIZING</span></article>
-          <article class="layer runtime"><span class="layer-no">B</span><div><small>EXECUTION</small><h3>Web Runtime</h3></div><p>AR-XMLを取得・解析し、Capabilityを公開する実装。Direct URL、Resolver URL、Manifest URLからのロードを扱い、InvocationはHumanまたはApplicationの明示的な要求でのみ発生します。</p><b>L0 / L1 load · Representative browser E2E passed</b><span class="phase-badge implemented">BASELINE IMPLEMENTED</span></article>
-          <article class="layer testbed"><span class="layer-no">C</span><div><small>CONFIDENCE</small><h3>Testbed</h3></div><p>AR-XML Runtimeと将来のRELink Protocol componentsを検証する、独立した決定論的テスト環境。Resolver/Manifestとセキュリティ受入ランナーも整備しています。</p><b>Fixtures · Scenarios · Acceptance observations</b><span class="phase-badge implemented">OPERATIONAL</span></article>
-          <article class="layer resolver"><span class="layer-no">D</span><div><small>RESOLUTION</small><h3>Resolver</h3></div><p>Anchor UUIDを現在のHTTPS Description Locationへ解決するL1層。Frozen 0.1仕様、Apache・PHP・SQLiteのReference implementation、Native / Container受入証拠が揃った実装baselineです。</p><b>303 · Lifecycle · L1 baseline</b><span class="phase-badge implemented">L1 BASELINE IMPLEMENTED</span></article>
-          <article class="layer trust"><span class="layer-no">E</span><div><small>METADATA / TRUST</small><h3>Manifest / Trust</h3></div><p>Manifest 0.1とExtension PolicyはFrozen。署名、Trust Chain、所有権移転などのAuthority層は後続段階です。</p><b>Manifest ≠ Trust</b><span class="phase-badge development">MANIFEST FROZEN · TRUST FUTURE</span></article>
-        </div>
-        <div class="role-separation" aria-label="AR-XMLとRELinkの責務分離">
-          <article><small>AR-XML</small><strong>Entity Interface Description</strong><p>Entityが何であり、どのCapability・入出力・要件・Interfaceを持つかを記述します。</p></article>
-          <article><small>RELink</small><strong>Resolution · Identity · Trust</strong><p>Physical Entityをそのモデルへ参加させ、長期的なIdentityと現在位置、将来のTrustを扱います。</p></article>
-        </div>
-        <p class="identity-note"><span>DESIGN RULE</span> Retrieval URL <b>≠</b> Canonical Entity Identity</p>
-      </section>
-
-      <section id="validation" class="validation section-shell">
-        <div class="section-index">03 / BROWSER VALIDATION</div>
-        <div class="validation-head">
-          <div><p class="kicker">REPRESENTATIVE E2E PASS</p><h2>代表的な処理経路を、<br />実ブラウザで確認。</h2></div>
-          <p>AR-XML Core Draft 4の代表的な処理経路について、RELink TestbedとWeb Runtime Test Harnessを用いた外部統合テストを完了しています。確認範囲は、今回実行した代表ケースに限定されます。</p>
-        </div>
-
-        <ol class="validation-flow" aria-label="実ブラウザで確認済みの処理経路">
-          <li><span>01</span><strong>AR-XML取得</strong></li>
-          <li><span>02</span><strong>Draft 4 Parse</strong></li>
-          <li><span>03</span><strong>Capability Discovery</strong></li>
-          <li><span>04</span><strong>Explicit Invocation</strong></li>
-          <li><span>05</span><strong>HTTP GET / POST</strong></li>
-          <li><span>06</span><strong>CORS / Preflight</strong></li>
-          <li><span>07</span><strong>Response Interpretation</strong></li>
-          <li><span>08</span><strong>Result / Error Mapping</strong></li>
-        </ol>
-
-        <div class="validation-roles">
-          <article><small>TEST CONDITIONS</small><h3>RELink Testbed</h3><p>Fixtures、protocol scenarios、観測結果を決定論的に提供します。Runtime本体から独立した検証環境です。</p></article>
-          <article><small>HUMAN-OPERATED DRIVER</small><h3>Web Runtime Test Harness</h3><p>人がブラウザ上でケースを選択・実行し、Web Runtimeの動作と観測結果を確認するアプリケーションです。</p></article>
-          <article><small>IMPLEMENTATION UNDER TEST</small><h3>Web Runtime</h3><p>AR-XMLを処理し、Consumerの明示的な要求を受けてCapabilityを実行する検証対象です。Testbedへの依存は持ちません。</p></article>
-        </div>
-        <p class="validation-boundary"><span>BOUNDARY</span><strong>Representative E2E PASS</strong><b>≠</b><strong>All specification paths validated</strong></p>
-        <div class="l1-baseline" aria-label="L0, L1, and L2 status"><article><small>L0</small><strong>Direct AR-XML loading</strong><span class="phase-badge implemented">IMPLEMENTED</span></article><article><small>L1</small><strong>Resolver-mediated loading</strong><span class="phase-badge implemented">IMPLEMENTED</span><p>Reference Resolver · Native / Container evidence recorded</p></article><article><small>L2</small><strong>Resolution authenticity / Trust</strong><span class="phase-badge planned">PLANNED / DESIGN</span></article></div>
-      </section>
-
-      <section id="arxml-example" class="example section-shell">
-        <div class="section-index">04 / AR-XML EXAMPLE</div>
-        <div class="example-head">
+      <section class="home-hero home-shell">
+        <div class="home-eyebrow"><span>PHYSICAL ENTITY DISCOVERY</span><span>L1 REFERENCE LAB · IMPLEMENTED BASELINE</span></div>
+        <div class="home-hero__grid">
           <div>
-            <p class="kicker">CONCRETE CONTRACT</p>
-            <h2>「何ができるか」と<br />「どう呼ぶか」を分ける。</h2>
+            <p class="home-kicker">WHAT RELINK DOES</p>
+            <h1>目の前にあるモノが、<br /><em>何者で何ができるか</em>を<br />Webから発見する。</h1>
+            <p class="home-lead">RELinkは、物理Entityのための共通の発見経路です。Physical Anchorから現在のEntity Descriptionへ進み、Capabilityと利用可能なInterfaceを人間と機械の両方に示します。</p>
+            <p class="home-boundary">RELinkは新しいIoT通信規格やWeb API規格ではありません。既存のHTTP(S)、WoT、BLE、MQTT、OPC UA、vendor APIなどへ到達するための、Physical Entity側の共通入口です。</p>
+            <div class="home-actions"><a class="home-button primary" href="#lab">実機Reference Labを見る <span>↓</span></a><a class="home-button secondary" href="smart-home.html">実装ガイドを読む <span>↗</span></a></div>
           </div>
-          <p>この例では、温度を読むという意味的なCapabilityを、HTTP GET Interfaceへ結び付けています。Interfaceが変わっても、Capabilityの意味は変わりません。</p>
-        </div>
-        <div class="example-grid">
-          <pre class="code-panel" aria-label="AR-XML temperature capability example"><code><span class="code-muted">&lt;ar-entity
-  xmlns="https://relink.dev/ns/arxml/core/0.1"
-  version="0.1"&gt;</span>
-  &lt;capabilities&gt;
-    &lt;capability
-      id="<span class="code-value">temperature</span>"
-      type="<span class="code-value">https://example.org/capabilities/temperature/read/1</span>"&gt;
-
-      &lt;result&gt;
-        &lt;outputs&gt;
-          &lt;output name="<span class="code-value">temperature</span>"
-                  type="<span class="code-value">number</span>" /&gt;
-        &lt;/outputs&gt;
-      &lt;/result&gt;
-
-      &lt;interfaces&gt;
-        &lt;interface type="<span class="code-value">http</span>"
-                   method="<span class="code-value">GET</span>"
-                   endpoint="<span class="code-value">/api/temperature</span>" /&gt;
-      &lt;/interfaces&gt;
-    &lt;/capability&gt;
-  &lt;/capabilities&gt;
-<span class="code-muted">&lt;/ar-entity&gt;</span></code></pre>
-          <dl class="contract-summary">
-            <div><dt>LOCAL ID</dt><dd><strong>temperature</strong><span>文書内でCapabilityを参照する短い識別子</span></dd></div>
-            <div class="semantic-id"><dt>SEMANTIC CAPABILITY ID</dt><dd><code>https://example.org/capabilities/<wbr>temperature/read/1</code><span>Capabilityの意味を示すグローバルなtype</span></dd></div>
-            <div><dt>RETURNS</dt><dd><strong>number</strong><span>temperatureというOutput</span></dd></div>
-            <div><dt>HOW</dt><dd><strong>HTTP GET</strong><span>/api/temperatureを呼び出すInterface</span></dd></div>
-            <div class="contract-principle"><dt>PRINCIPLE</dt><dd>Capability <b>≠</b> Interface</dd></div>
-          </dl>
-        </div>
-        <a class="text-link" href="https://github.com/ranmaru50/relink-web-runtime/blob/main/docs/specs/arxml-core-0.1-draft4.md" rel="noreferrer">Read AR-XML Core 0.1 Draft 4 <span>↗</span></a>
-      </section>
-
-      <section class="journey section-shell">
-        <div class="section-index">05 / CURRENT &amp; TARGET FLOW</div>
-        <div class="journey-head">
-          <div><p class="kicker">CURRENT &amp; TARGET</p><h2>現在の最小フローと、<br />目指す全体フロー。</h2></div>
-          <p>Web Runtimeで試せる現在のBaselineと、Resolver導入後にPhysical Anchorから始まるTarget Architectureを分けて示します。</p>
-        </div>
-        <div class="journey-modes">
-          <article class="journey-mode current">
-            <div class="journey-mode-head">
-              <div><span>01 / CURRENT BASELINE</span><h3>AR-XML URLから実行する</h3></div>
-              <mark>BASELINE VALIDATED</mark>
-            </div>
-            <p>現在のWeb Runtimeが実装している最小経路。AR-XMLの読み込みだけではCapabilityを実行しません。HumanまたはApplicationが発見したCapabilityを選び、明示的にInvocationを要求します。</p>
-            <div class="journey-flow" aria-label="現在のBaseline">
-              <span><small>LOAD</small>AR-XML URL</span><i>→</i>
-              <span><small>DISCOVER</small>Web Runtime</span><i>→</i>
-              <span><small>REQUEST</small>Human / Application</span><i>→</i>
-              <strong><small>INVOKE</small>Capability</strong>
-            </div>
-          </article>
-          <article class="journey-mode target">
-            <div class="journey-mode-head">
-              <div><span>02 / TARGET ARCHITECTURE</span><h3>Physical Anchorから解決する</h3></div>
-              <mark>L1 BASELINE IMPLEMENTED</mark>
-            </div>
-            <p>Frozen Resolver Core 0.1とReference implementationを基礎にした実装済みL1フロー。Anchor UUIDから現在のHTTPS Description Locationへ解決し、最終AR-XML URLをRuntimeへ引き渡します。Native / ContainerのResolver受入結果をTestbedへ記録しています。</p>
-            <div class="journey-flow" aria-label="Resolver導入後のTarget Architecture">
-              <span><small>TOUCH</small>Anchor</span><i>→</i>
-              <span class="resolver-step"><small>RESOLVE</small>Resolver</span><i>→</i>
-              <span><small>LOAD</small>AR-XML</span><i>→</i>
-              <span><small>EXECUTE</small>Runtime</span><i>→</i>
-              <strong><small>RESULT</small>Capability</strong>
-            </div>
-          </article>
-        </div>
-        <p class="journey-note"><span>BOUNDARY</span> Resolver-mediated L1 pathは実装済みbaselineです。今回の受入証拠は適用対象のResolver側targetに限定され、広いConsumer統合・実機検証はこれからです。Direct AR-XML loadingはL0 pathです。</p>
-      </section>
-
-      <section class="security-scope section-shell">
-        <div class="section-index">06 / SECURITY SCOPE</div>
-        <div class="security-grid">
-          <article class="security-current">
-            <span class="phase-badge implemented">VALIDATED BASELINE</span>
-            <small>L0 / DIRECT RETRIEVAL</small>
-            <h2>AR-XML URL<br />→ Runtime</h2>
-            <p>直接AR-XMLを取得する経路と、実ブラウザが持つ通常のネットワークセキュリティ境界を確認しています。</p>
-          </article>
-          <article class="security-next">
-            <span class="phase-badge implemented">L1 BASELINE IMPLEMENTED</span>
-            <small>L1 / RESOLUTION</small>
-            <h2>Anchor<br />→ Resolver</h2>
-            <p>Resolver Core 0.1とReference Resolverを基礎に、Canonical Entity Identityと現在のDescription Locationを分離し、HTTPS経由でRuntimeへ接続するL1 baselineを実装しました。Native / Container受入結果を記録済みで、より広い統合・実機検証が次の対象です。</p>
-            <div class="security-flow">Anchor → Resolver → Canonical Entity Identity → AR-XML Location → HTTPS → Runtime</div>
-          </article>
-        </div>
-        <p class="security-note">Manifest 0.1のoptional integrity metadataはTrustやAuthenticationを確立しません。署名、Trust Chain、CertificationはFuture workです。</p>
-      </section>
-
-
-      <section id="use-cases" class="use-cases section-shell">
-        <div class="section-index">07 / USE CASES</div>
-        <div class="use-cases-head">
-          <div>
-            <p class="kicker">FROM LINK TO ACTION</p>
-            <h2>現場ごとに違うモノを、<br />同じ流れで扱う。</h2>
-          </div>
-          <p>RELinkが共通化するのは製品固有の操作ではなく、対象を見つけ、能力を理解し、条件を確かめて実行するまでの流れです。</p>
-        </div>
-
-        <div class="use-case-list">
-          <article class="use-case featured">
-            <div class="use-case-meta"><span>UC / 01</span><b>PUBLIC EQUIPMENT</b></div>
-            <div class="use-case-title">
-              <span class="use-case-icon" aria-hidden="true">◎</span>
-              <div><small>TOUCH TO USE</small><h3>その場の設備を<br />すぐに操作する</h3></div>
-            </div>
-            <p>利用者が共有設備のQRやNFCに触れると、その機器専用アプリを探さなくても、現在利用できる操作と必要条件を確認できます。</p>
-            <div class="use-case-flow" aria-label="QRまたはNFCから設備操作まで">
-              <span>QR / NFC</span><i>→</i><span>Resolve</span><i>→</i><span>Available actions</span><i>→</i><strong>Operate</strong>
-            </div>
-            <ul><li>会議室設備</li><li>充電器</li><li>シェア機器</li></ul>
-          </article>
-
-          <article class="use-case">
-            <div class="use-case-meta"><span>UC / 02</span><b>FIELD SERVICE</b></div>
-            <div class="use-case-title">
-              <span class="use-case-icon" aria-hidden="true">△</span>
-              <div><small>IDENTIFY &amp; INSPECT</small><h3>保守対象を特定し、<br />診断を実行する</h3></div>
-            </div>
-            <p>保守担当者は現物のAnchorから正しいEntityへ到達し、モデルや設置場所を推測せずに、その個体が公開する診断Capabilityを呼び出せます。</p>
-            <div class="use-case-flow"><span>Asset ID</span><i>→</i><span>Entity</span><i>→</i><strong>Diagnostics</strong></div>
-            <ul><li>設備保全</li><li>点検</li><li>遠隔支援</li></ul>
-          </article>
-
-          <article class="use-case">
-            <div class="use-case-meta"><span>UC / 03</span><b>ROBOTICS</b></div>
-            <div class="use-case-title">
-              <span class="use-case-icon" aria-hidden="true">◇</span>
-              <div><small>MULTI-VENDOR CONTROL</small><h3>異なるロボットの<br />能力を発見する</h3></div>
-            </div>
-            <p>制御側はベンダーごとのAPI名ではなく、移動・把持・計測などの意味的なCapabilityを発見し、対応するHTTPやROS Bindingを選択できます。</p>
-            <div class="use-case-flow"><span>Discover</span><i>→</i><span>Choose binding</span><i>→</i><strong>Invoke</strong></div>
-            <ul><li>搬送</li><li>協働ロボット</li><li>研究開発</li></ul>
-          </article>
-
-          <article class="use-case">
-            <div class="use-case-meta"><span>UC / 04</span><b>AI AGENTS</b></div>
-            <div class="use-case-title">
-              <span class="use-case-icon" aria-hidden="true">✣</span>
-              <div><small>SEMANTIC ACTION</small><h3>Agentが能力と条件を<br />理解して実行する</h3></div>
-            </div>
-            <p>AI Agentは機器固有の事前統合なしに、入力・出力・要件を機械的に読み取り、Runtimeの安全な評価を経てCapabilityを選択できます。</p>
-            <div class="use-case-flow"><span>Inspect</span><i>→</i><span>Evaluate</span><i>→</i><strong>Act</strong></div>
-            <ul><li>オートメーション</li><li>MCP Binding</li><li>自律エージェント</li></ul>
-          </article>
-        </div>
-        <p class="use-case-note"><span>COMMON MODEL</span> 同じAR-XML semanticsを、Web・Python・Kotlinなど複数のRuntimeから利用することを目指します。</p>
-      </section>
-
-      <section id="positioning" class="positioning section-shell">
-        <div class="section-index">08 / POSITIONING</div>
-        <div class="positioning-head">
-          <div><p class="kicker">RELATED TECHNOLOGIES</p><h2>既存のWebを置き換えず、<br />意味とIdentityを重ねる。</h2></div>
-          <p>RELinkはHTTPやWeb APIを置き換える提案ではありません。既存技術を実行手段として使いながら、Physical Entityから意味的なCapabilityまでを一続きに扱う上位アーキテクチャです。</p>
-        </div>
-        <div class="technology-list">
-          <article><span class="tech-name">HTTP / REST</span><p>通信とCapability invocationの手段。</p><b>RELinkが利用</b></article>
-          <article><span class="tech-name">OpenAPI</span><p>個々のWeb APIの操作と入出力を記述。</p><b>AR-XMLはEntity capabilityを記述</b></article>
-          <article><span class="tech-name">WoT TD</span><p>Thingのproperties・actions・eventsを記述する近接領域。</p><b>Identity / Resolver分離を検証</b></article>
-          <article><span class="tech-name">GS1 Digital Link</span><p>識別子をWeb上の情報資源へ結び付ける仕組み。</p><b>Physical Anchorで補完可能</b></article>
-          <article><span class="tech-name">MCP</span><p>AIアプリケーションとToolを接続するプロトコル。</p><b>将来の実行Binding候補</b></article>
-        </div>
-        <p class="positioning-note">この整理は現在の設計上の位置付けであり、各技術との互換性や準拠を宣言するものではありません。</p>
-      </section>
-
-      <section id="roadmap" class="roadmap section-shell">
-        <div class="section-index light">09 / ROADMAP</div>
-        <div class="roadmap-head"><div><p class="kicker coral">L1 BASELINE IMPLEMENTED</p><h2>Resolver仕様から、<br />Trust / L2の設計へ。</h2></div><p>Resolver／Manifest 0.1仕様群をFrozen baselineとして実装とTestbedへ引き渡し、Reference Resolver、Web Runtime L1ロード、Native / Container受入証拠まで整備しました。次はTrust / L2設計、広い統合・実機検証です。</p></div>
-        <div class="milestones">
-          <article class="milestone active completed"><span class="status">COMPLETED</span><div class="milestone-id">M1</div><h3>Draft 4 Baseline</h3><p>Web Runtime、Testbed、Test Harnessを接続し、代表経路を実ブラウザで検証。</p><ul><li>Core Draft 4</li><li>GET / POST / CORS</li><li>Result / Error Mapping</li></ul></article>
-          <article class="milestone active completed"><span class="status">COMPLETED</span><div class="milestone-id">M2</div><h3>Independent Testbed</h3><p>決定論的なfixture、protocol scenario、観測をRuntimeから独立して提供。</p><ul><li>Draft 4 Fixtures</li><li>Protocol Scenarios</li><li>Browser Harness</li></ul></article>
-          <article class="milestone active completed"><span class="status">COMPLETED</span><div class="milestone-id">M3</div><h3>Reference Resolver / L1</h3><p>Frozen 0.1仕様とReference implementationを基礎に、L1経路をTestbedとWeb Runtimeへ接続し、適用対象のNative / Container受入結果を記録。</p><ul><li>Core / Lifecycle / Manifest Frozen</li><li>Apache / PHP / SQLite Reference</li><li>Web Runtime L1 Loading</li><li>Resolver acceptance evidence</li></ul></article>
-          <article class="milestone next"><span class="status">NEXT</span><div class="milestone-id">M4</div><h3>Trust / L2 &amp; Expansion</h3><p>L2のresolution authenticity / Trust設計、より広いResolver → Runtime統合、低コストな物理E2E環境、Core安定化を検討する。</p><ul><li>Trust / L2 design</li><li>Broader integration validation</li><li>Physical E2E reference environment</li><li>AR-XML Core stabilization</li></ul></article>
+          <aside class="home-hero__questions" aria-label="RELinkが解く問い">
+            <p>THE DEVICE IS HERE.</p><h2>でもソフトウェアは<br />まだ知りません。</h2>
+            <ul><li><span>01</span>これは何者か</li><li><span>02</span>何ができるか</li><li><span>03</span>現在どこから利用するか</li></ul>
+            <div><strong>RELink</strong><span> makes this discoverable.</span></div>
+          </aside>
         </div>
       </section>
 
-      <section id="projects" class="open-section section-shell">
-        <div class="open-panel">
-          <div class="section-index">10 / EXPLORE THE PROJECT</div>
-          <p class="kicker">OPEN BY DESIGN</p>
-          <h2>説明の次は、<br />動く実装と仕様へ。</h2>
-          <p>Draft 4の代表的な処理経路は実ブラウザで確認済みです。Resolverプロジェクトでは、Frozen 0.1仕様群、Reference implementation、受入fixtureを公開し、L1実装baselineからTrust / L2設計と広い検証へ進んでいます。</p>
-          <div class="project-grid">
-            <a class="project-card resolver-project" href="https://github.com/ranmaru50/relink-resolver" rel="noreferrer">
-              <span class="phase-badge implemented">L1 BASELINE IMPLEMENTED</span>
-              <small>NEW / RESOLVE</small>
-              <h3>RELink Resolver</h3>
-              <p>Resolver Core、Lifecycle、Manifest、Conformance Catalog、Web Runtime Integration ContractのFrozen 0.1 baseline、Apache・PHP・SQLiteのReference implementation、Native / Container受入証拠。</p>
-              <b>Explore resolver project ↗</b>
-            </a>
-            <a class="project-card" href="https://github.com/ranmaru50/relink-web-runtime" rel="noreferrer">
-              <span class="phase-badge implemented">BASELINE IMPLEMENTED</span>
-              <small>01 / EXECUTE</small>
-              <h3>Web Runtime</h3>
-              <p>AR-XML Draft 4をBrowserで解釈し、Consumerの明示的要求でHTTP Capabilityを実行するRuntime。</p>
-              <b>Explore repository ↗</b>
-            </a>
-            <a class="project-card" href="https://github.com/ranmaru50/relink-testbed" rel="noreferrer">
-              <span class="phase-badge implemented">OPERATIONAL</span>
-              <small>02 / VERIFY</small>
-              <h3>Testbed</h3>
-              <p>Runtimeと将来のProtocol componentsを検証する独立・決定論的な試験環境。</p>
-              <b>Explore repository ↗</b>
-            </a>
-            <a class="project-card" href="https://github.com/ranmaru50/relink-web-runtime#web-runtime-test-harness" rel="noreferrer">
-              <span class="phase-badge implemented">BROWSER TESTED</span>
-              <small>03 / DRIVE</small>
-              <h3>Test Harness</h3>
-              <p>人が実ブラウザでWeb Runtimeを操作し、結果・Error・Testbed observationを比較する評価UI。</p>
-              <b>Read usage guide ↗</b>
-            </a>
-            <a class="project-card" href="https://github.com/ranmaru50/relink-web-runtime/blob/main/docs/specs/arxml-core-0.1-draft4.md" rel="noreferrer">
-              <span class="phase-badge experimental">DRAFT 4</span>
-              <small>04 / READ</small>
-              <h3>AR-XML Core</h3>
-              <p>Entity、Capability、Result、Requirement、Interfaceの現在の情報モデル。</p>
-              <b>Read specification ↗</b>
-            </a>
-          </div>
-        </div>
+      <section id="what" class="home-section home-shell what-section">
+        <div class="home-index">01 / WHAT RELINK ADDS</div>
+        <div class="home-section-head"><div><p class="home-kicker">A COMMON ENTRY POINT</p><h2>URLではなく、<br />その先の<em>意味</em>をそろえる。</h2></div><p>QRやNFCからURLを受け取ること自体は、すでにできます。問題は、そのURLがページ、API、管理画面、WoT TD、またはEntity Descriptionのどれなのかを、Consumerが共通に判断できないことです。</p></div>
+        <div class="home-before-after"><article><small>EXISTING WEB IS ENOUGH FOR</small><strong>Physical object → QR / NFC → URL</strong><p>安定URLとHTTP redirectだけでも、現在のURLへ案内できます。しかしURL先の意味やCapabilityは共通化されません。</p></article><article class="home-before-after__result"><small>RELINK ADDS</small><strong>Physical Anchor → Entity → Capability → Interface</strong><p>物理Anchorから、現在のDescriptionと意味的なCapabilityへ到達する経路を定義します。実行方式は既存技術を利用します。</p></article></div>
+        <div class="discovery-map" aria-label="RELink discovery flow"><div><small>PHYSICAL PRESENCE</small><strong>Physical<br />Entity</strong></div><i>→</i><div><small>STABLE ENTRY</small><strong>Physical<br />Anchor</strong></div><i>→</i><div><small>INDIRECTION</small><strong>Resolver<br /><span>303</span></strong></div><i>→</i><div><small>DESCRIPTION</small><strong>Entity<br />Description</strong></div><i>→</i><div><small>MEANING</small><strong>Capability</strong></div><i>→</i><div><small>EXECUTION</small><strong>Existing<br />Interface</strong></div></div>
       </section>
+
+      <section id="lab" class="home-section home-shell lab-section">
+        <div class="home-index light">02 / REFERENCE LAB</div>
+        <div class="home-section-head"><div><p class="home-kicker mint">PHYSICAL PATH</p><h2>概念だけでなく、<br /><em>Pico 2 W</em>までつなぐ。</h2></div><p>RELink Pico 2 W Reference Labは、既存のResolver、AR-XML、Web Runtime、Capability API、Gateway、物理デバイスを分離したまま接続する最小L1参照ラボです。</p></div>
+        <div class="lab-proof"><article class="lab-proof__chain"><small>DISCOVERY / DESCRIPTION PLANE</small><div><span>Anchor</span><i>→</i><span>Resolver</span><i>→</i><span>AR-XML</span><i>→</i><strong>Web Runtime</strong></div><p><code>load()</code> はDescriptionの取得・解析・公開です。ロードしただけで機器は動きません。</p></article><article class="lab-proof__chain"><small>EXPLICIT EXECUTION PLANE</small><div><span>Human / Web App</span><i>→</i><span>RuntimeCapability.<wbr />invoke()</span><i>→</i><span>Capability API</span><i>→</i><strong>Pico 2 W</strong></div><p><code>invoke()</code> が明示的に要求されたときだけ、Capability APIを経由して物理Entityへ届きます。</p></article></div>
+        <div class="lab-grid"><article><small>PHYSICAL OUTPUT</small><h3>Onboard LED</h3><p><code>light.setState</code> によるLED ON / OFFを対象にした実機経路。</p></article><article><small>PHYSICAL INPUT</small><h3>RP2350 temperature</h3><p><code>temperature.read</code> による内部温度の読み取り。正確な室温計測を主張するものではありません。</p></article><article><small>IMPLEMENTATION BOUNDARY</small><h3>Not L2 or production security</h3><p>Trust、認証、認可、完全準拠の証明ではありません。明示操作のL1参照経路を扱います。</p></article></div>
+        <a class="home-link light-link" href="https://github.com/ranmaru50/relink-reference-lab" rel="noreferrer">Reference Labの構成・受入範囲を見る <span>↗</span></a>
+      </section>
+
+      <section id="comparison" class="home-section home-shell comparison-section">
+        <div class="home-index">03 / EXISTING TECHNOLOGIES</div>
+        <div class="home-section-head"><div><p class="home-kicker">COMPLEMENT, NOT REPLACEMENT</p><h2>既存技術を置き換えず、<br />物理Entityから<em>つなぐ</em>。</h2></div><p>RELinkの役割は、個々のtransport、API、Thing Description、商品識別子を統一することではありません。物理Entityを起点に、それらへの共通入口を提供することです。</p></div>
+        <div class="comparison-table" role="region" aria-label="既存技術との位置付け" tabindex="0"><table><thead><tr><th>技術</th><th>主に解決するもの</th><th>RELinkとの関係</th></tr></thead><tbody><tr><th>QR / NFC URL</th><td>物理物からURLへの移動</td><td>URL先の意味やCapabilityは共通化しない</td></tr><tr><th>GS1</th><td>商品・物流対象の識別</td><td>operational Capabilityの発見が主目的ではない</td></tr><tr><th>WoT TD</th><td>Thingのinteraction記述</td><td>Physical Anchorから現在のTDへ到達する経路とは別の役割</td></tr><tr><th>OpenAPI</th><td>個別Web APIの操作・データ記述</td><td>Physical EntityやAnchorを扱わない</td></tr><tr><th>MQTT / OPC UA / BLE</th><td>device messaging・産業・近接通信</td><td>Capabilityを実行するInterfaceになり得る</td></tr><tr class="comparison-table__focus"><th>RELink</th><td>Physical EntityからCapabilityへの共通解決経路</td><td>実際のAPI・transportは既存技術を利用可能</td></tr></tbody></table></div>
+        <p class="home-note"><span>EXAMPLE</span> 同じ <code>light.setState</code> Capabilityが、HTTPS POST、WoT TD、BLE、vendor-specific adapterという複数Interfaceを持てます。現在のWeb Runtimeの中心はHTTP(S)ですが、これはRuntime実装の境界であり、RELink仕様全体の制限ではありません。</p>
+      </section>
+
+      <section id="who" class="home-section home-shell audience-section">
+        <div class="home-index">04 / WHEN RELINK HELPS</div>
+        <div class="home-section-head"><div><p class="home-kicker">USE IT WHEN DISCOVERY MATTERS</p><h2>単純なAPIより、<br />Entityの<em>発見</em>が必要なとき。</h2></div><p>1台のdevice、1つのapplication、既知のAPIだけで完結するなら、REST APIを直接使う方が簡単です。RELinkはそこに余分な層を足すためのものではありません。</p></div>
+        <div class="audience-grid"><article><small>APPLICATION / WEB</small><h3>事前知識のないEntityを扱う</h3><p>個別APIをあらかじめ組み込まず、Capabilityを見つけて利用したい開発者。</p></article><article><small>DEVICE / PRODUCT</small><h3>既存実装を捨てずに入口を足す</h3><p>API、SDK、WoT、BLE、MQTTなどを維持したまま、Physical AnchorとDiscoveryを追加したいメーカー。</p></article><article><small>SYSTEM INTEGRATION</small><h3>複数ベンダーを意味で統合する</h3><p>通信方式や製品差を越えて、EntityとCapability単位で接続したい人。</p></article><article><small>AGENT / AUTOMATION</small><h3>機械可読な操作候補を得る</h3><p>現実空間のEntityが何をできるかを取得し、Application側の方針で明示実行したい開発者。</p></article></div>
+      </section>
+
+      <section id="how" class="home-section home-shell how-section">
+        <div class="home-index light">05 / HOW IT WORKS</div>
+        <div class="home-section-head"><div><p class="home-kicker mint">SMALL, SEPARATE RESPONSIBILITIES</p><h2>発見と実行を、<br />同じものにしない。</h2></div><p>最小のWeb-native baselineは、Physical Anchor、UUID、Resolver、HTTPS、Entity Descriptionです。Resolverは小さく、Interfaceの呼び出しには関与しません。</p></div>
+        <div class="how-flow"><div class="how-row"><span>01</span><div><small>STABLE PHYSICAL REFERENCE</small><strong>Physical Anchor / UUID</strong></div><p>QRやNFCなどに置ける、Entityへの安定した物理入口。</p></div><div class="how-row"><span>02</span><div><small>DNS-LIKE INDIRECTION</small><strong>Resolver → 303 See Other</strong></div><p>UUIDを現在のEntity Description Locationへ解決するだけ。AR-XMLを解析せず、Capabilityを実行しません。</p></div><div class="how-row"><span>03</span><div><small>ENTITY INTERFACE DESCRIPTION</small><strong>AR-XML</strong></div><p>Entity、Capability、Input Contract、Result Contract、Interfaceを機械可読に記述します。</p></div><div class="how-row"><span>04</span><div><small>RUNTIME + APPLICATION</small><strong>Discover, then explicitly invoke</strong></div><p>Web RuntimeはCapabilityを公開し、HumanまたはApplicationが明示要求した場合だけInterfaceを呼び出します。</p></div></div>
+        <div class="principles-strip"><span>Entity ≠ Location</span><span>Capability ≠ Interface</span><span>Description ≠ Execution</span><span>Resolution ≠ Authentication</span></div>
+      </section>
+
+      <section class="home-section home-shell implementation-section">
+        <div class="home-index">06 / CURRENT BASELINE</div>
+        <div class="home-section-head"><div><p class="home-kicker">WHAT EXISTS TODAY</p><h2>仕様の全体ではなく、<br />現在の<em>実装範囲</em>を示す。</h2></div><p>Capabilityの概念とRuntimeが実際に対応しているInterfaceは同じ範囲ではありません。以下は公開リポジトリで確認できる現行baselineです。</p></div>
+        <div class="status-grid"><article><span class="status-pill done">IMPLEMENTED</span><h3>Resolver Core 0.1 / L1</h3><p>UUIDからHTTPS Description LocationへのResolver経路とReference Resolver。</p></article><article><span class="status-pill done">IMPLEMENTED</span><h3>Web Runtime 0.1.0</h3><p>Browser向けのAR-XML Draft 4 load / parse / validate / explicit HTTP invocation。</p></article><article><span class="status-pill done">OPERATIONAL</span><h3>Testbed</h3><p>RuntimeとProtocol componentを独立して検証する決定論的なfixture・scenario環境。</p></article><article><span class="status-pill lab">REFERENCE LAB</span><h3>Pico 2 W L1 path</h3><p>Resolver-mediated loading、Capability API、LEDと内部温度の参照経路。</p></article><article><span class="status-pill draft">DRAFT / STABILIZING</span><h3>AR-XML Core 0.1 Draft 4</h3><p>Entity Interface Description Language。UI markupではありません。</p></article><article><span class="status-pill next">NEXT</span><h3>Trust / L2</h3><p>Resolution authenticity、Trust、より広い統合・物理検証はこれからです。</p></article></div>
+        <p class="implementation-boundary"><span>BOUNDARY</span> Reference Labとrepresentative browser testsは、L2 security、production authorization、完全準拠、全環境での互換性を主張しません。</p>
+      </section>
+
+      <section id="projects" class="home-section home-shell projects-section">
+        <div class="home-index">07 / SPECIFICATIONS &amp; IMPLEMENTATIONS</div>
+        <div class="home-section-head"><div><p class="home-kicker">READ THE ACTUAL WORK</p><h2>概念から、<br />公開実装と仕様へ。</h2></div><p>RELinkは実験的なアーキテクチャです。仕様、Runtime、Resolver、Testbed、Reference Labを別々に公開し、責務と検証範囲を追えるようにしています。</p></div>
+        <div class="project-links"><a href="https://github.com/ranmaru50/relink-reference-lab" rel="noreferrer"><span>01 / PHYSICAL REFERENCE</span><strong>RELink Pico 2 W Reference Lab</strong><b>↗</b></a><a href="https://github.com/ranmaru50/relink-resolver" rel="noreferrer"><span>02 / RESOLUTION</span><strong>RELink Resolver Core &amp; Reference Resolver</strong><b>↗</b></a><a href="https://github.com/ranmaru50/relink-web-runtime" rel="noreferrer"><span>03 / BROWSER RUNTIME</span><strong>RELink Web Runtime 0.1.0</strong><b>↗</b></a><a href="https://github.com/ranmaru50/relink-testbed" rel="noreferrer"><span>04 / VERIFICATION</span><strong>RELink Testbed</strong><b>↗</b></a><a href="https://github.com/ranmaru50/relink-web-runtime/blob/main/docs/specs/arxml-core-0.1-draft4.md" rel="noreferrer"><span>05 / SPECIFICATION</span><strong>AR-XML Core 0.1 Draft 4</strong><b>↗</b></a><a href="smart-home.html"><span>06 / TECHNICAL GUIDE</span><strong>照明と室温で学ぶRELink</strong><b>↗</b></a></div>
+      </section>
+
+      <section id="vision" class="vision-section home-shell"><div><p class="home-kicker mint">VISION, KEPT SMALL</p><h2>Webを置き換えない。<br />物理Entityが、<em>参加できる</em>ようにする。</h2></div><p>RELinkの将来像は、Web APIs、WoT、GS1、OPC UA、AAS、BLE、vendor systemsを一つに置き換えることではありません。異なるecosystemへ、Physical Entityを中心に到達できるようにすることです。</p><blockquote>ARのためにWebを作り直さない。<br />Webの上に現実空間を参加させる。</blockquote></section>
     </main>
 
-    <footer class="site-footer">
-      <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>RELink</span></a>
-      <p>Real Entity Link — Bringing real-world entities into the Web.</p>
-      <a href="#top">Back to top ↑</a>
-    </footer>
+    <footer class="site-footer home-footer"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>RELink</span></a><p>Physical Entity Discovery / Experimental architecture</p><a href="https://github.com/ranmaru50" rel="noreferrer">GitHub ↗</a></footer>
   </body>
 </html>
