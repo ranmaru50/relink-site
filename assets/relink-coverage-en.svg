@@ -21,5 +21,5 @@
     <rect class="box tech" x="728" y="386" width="260" height="78"/><text class="label" x="758" y="419">WoT / OPC UA / GS1</text><text class="small" x="758" y="447">domain strengths</text>
   </g>
   <g><path class="arrow" d="M305 189C430 116 566 116 686 189"/><path class="arrow" d="M435 307C550 241 650 241 760 307"/><text class="thin" x="412" y="164">Strong individually; a cross-cutting path is rebuilt each time</text></g>
-  <g><rect class="relink" x="300" y="500" width="600" height="82" rx="10"/><text class="relinktext" x="332" y="536">RELink: Physical Anchor → Resolver → Entity → Capability → Interface</text><text class="relinktext" x="332" y="563">A thin interoperability layer to reach existing technologies</text><rect class="tag" x="918" y="511" width="195" height="44" rx="5"/><text class="tagtext" x="946" y="540">Connect, not replace</text></g>
+  <g><rect class="relink" x="270" y="500" width="600" height="98" rx="10"/><text class="relinktext" x="300" y="534">RELink: Anchor → Resolver → Entity</text><text class="relinktext" x="300" y="560">→ Capability → Interface</text><text class="relinktext" x="300" y="586">A thin interoperability layer to reach existing technologies</text><rect class="tag" x="892" y="527" width="195" height="44" rx="5"/><text class="tagtext" x="920" y="556">Connect, not replace</text></g>
 </svg>

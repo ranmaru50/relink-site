@@ -25,9 +25,10 @@
     <text class="thin" x="432" y="164">個別には強いが、横断的な経路は毎回つくる</text>
   </g>
   <g>
-    <rect class="relink" x="300" y="500" width="600" height="82" rx="10"/>
-    <text class="relinktext" x="332" y="536">RELink：Physical Anchor → Resolver → Entity → Capability → Interface</text>
-    <text class="relinktext" x="332" y="563">既存技術へ到達する、薄い相互運用層</text>
-    <rect class="tag" x="918" y="511" width="195" height="44" rx="5"/><text class="tagtext" x="944" y="540">置き換えではなく接続</text>
+    <rect class="relink" x="270" y="500" width="600" height="98" rx="10"/>
+    <text class="relinktext" x="300" y="534">RELink：Anchor → Resolver → Entity</text>
+    <text class="relinktext" x="300" y="560">→ Capability → Interface</text>
+    <text class="relinktext" x="300" y="586">既存技術へ到達する、薄い相互運用層</text>
+    <rect class="tag" x="892" y="527" width="195" height="44" rx="5"/><text class="tagtext" x="918" y="556">置き換えではなく接続</text>
   </g>
 </svg>
