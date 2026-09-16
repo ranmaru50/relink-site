@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="690" viewBox="0 0 1200 690" role="img" aria-labelledby="title desc">
+  <title id="title">既存技術とRELinkがカバーする範囲</title>
+  <desc id="desc">物理世界から情報サービスへ向かう経路で、既存技術は個別の領域に強く、RELinkはそれらをつなぐ薄い相互運用層として表現されている。</desc>
+  <defs>
+    <style>
+      .bg{fill:#071b2b}.grid{stroke:#426071;stroke-width:1}.axis{stroke:#a7f3d0;stroke-width:2}.label{fill:#f2efe6;font:500 22px 'Noto Sans JP',sans-serif}.small{fill:#b8c6ce;font:500 16px 'Noto Sans JP',sans-serif}.mono{fill:#a7f3d0;font:600 14px 'IBM Plex Mono',monospace;letter-spacing:1.5px}.box{stroke:#f2efe6;stroke-width:1.5;rx:8}.tech{fill:#17364b}.relink{fill:#a7f3d0}.relinktext{fill:#071b2b;font:600 20px 'Noto Sans JP',sans-serif}.arrow{stroke:#ff765f;stroke-width:3;fill:none;marker-end:url(#head)}.thin{fill:#ff765f;font:600 15px 'IBM Plex Mono',monospace;letter-spacing:1px}.tag{fill:#ffd166}.tagtext{fill:#071b2b;font:600 15px 'Noto Sans JP',sans-serif}
+    </style>
+    <marker id="head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="#ff765f"/></marker>
+  </defs>
+  <rect class="bg" width="1200" height="690" rx="18"/>
+  <g opacity=".42"><path class="grid" d="M70 105H1130M70 190H1130M70 275H1130M70 360H1130M70 445H1130M70 530H1130M70 615H1130M175 70V620M350 70V620M525 70V620M700 70V620M875 70V620M1050 70V620"/></g>
+  <text class="mono" x="70" y="54">WHERE EXISTING TECHNOLOGIES STOP</text>
+  <text class="label" x="70" y="92">物理世界</text><text class="label" x="1025" y="92">情報サービス</text>
+  <path class="axis" d="M90 640H1110" marker-end="url(#head)"/>
+  <text class="small" x="70" y="670">目の前の対象</text><text class="small" x="927" y="670">既存のAPI・protocol・service</text>
+  <g>
+    <rect class="box tech" x="92" y="150" width="180" height="78"/><text class="label" x="121" y="183">QR / NFC</text><text class="small" x="121" y="211">物理入口</text>
+    <rect class="box tech" x="255" y="268" width="170" height="78"/><text class="label" x="291" y="301">BLE</text><text class="small" x="291" y="329">近距離接続</text>
+    <rect class="box tech" x="775" y="150" width="205" height="78"/><text class="label" x="807" y="183">Web API / OpenAPI</text><text class="small" x="807" y="211">サービス利用</text>
+    <rect class="box tech" x="865" y="268" width="176" height="78"/><text class="label" x="893" y="301">OAuth / WebAuthn</text><text class="small" x="893" y="329">認証</text>
+    <rect class="box tech" x="728" y="386" width="260" height="78"/><text class="label" x="758" y="419">WoT / OPC UA / GS1</text><text class="small" x="758" y="447">個別領域の強み</text>
+  </g>
+  <g>
+    <path class="arrow" d="M305 189C430 116 566 116 686 189"/><path class="arrow" d="M435 307C550 241 650 241 760 307"/>
+    <text class="thin" x="432" y="164">個別には強いが、横断的な経路は毎回つくる</text>
+  </g>
+  <g>
+    <rect class="relink" x="300" y="500" width="600" height="82" rx="10"/>
+    <text class="relinktext" x="332" y="536">RELink：Physical Anchor → Resolver → Entity → Capability → Interface</text>
+    <text class="relinktext" x="332" y="563">既存技術へ到達する、薄い相互運用層</text>
+    <rect class="tag" x="918" y="511" width="195" height="44" rx="5"/><text class="tagtext" x="944" y="540">置き換えではなく接続</text>
+  </g>
+</svg>

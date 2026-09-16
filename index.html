@@ -29,7 +29,7 @@
       <a class="brand" href="#top" aria-label="RELink ホーム"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>RELink</span></a>
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
       <nav id="site-nav" aria-label="メインナビゲーション">
-        <a href="#what">What</a><a href="#lab">Reference Lab</a><a href="#comparison">Comparison</a><a href="#how">How it works</a><a href="#projects">Projects</a><a class="guide-nav-link" href="smart-home.html">Guide ↗</a><a class="language-switch" href="en/index.html">English ↗</a>
+        <a href="#what">What</a><a href="#gap">Why RELink?</a><a href="#lab">Reference Lab</a><a href="#comparison">Comparison</a><a href="#how">How it works</a><a href="#projects">Projects</a><a class="guide-nav-link" href="smart-home.html">Guide ↗</a><a class="language-switch" href="en/index.html">English ↗</a>
       </nav>
     </header>
 
@@ -59,8 +59,17 @@
         <div class="discovery-map" aria-label="RELink discovery flow"><div><small>PHYSICAL PRESENCE</small><strong>Physical<br />Entity</strong></div><i>→</i><div><small>STABLE ENTRY</small><strong>Physical<br />Anchor</strong></div><i>→</i><div><small>INDIRECTION</small><strong>Resolver<br /><span>303</span></strong></div><i>→</i><div><small>DESCRIPTION</small><strong>Entity<br />Description</strong></div><i>→</i><div><small>MEANING</small><strong>Capability</strong></div><i>→</i><div><small>EXECUTION</small><strong>Existing<br />Interface</strong></div></div>
       </section>
 
+      <section id="gap" class="home-section home-shell gap-section">
+        <div class="home-index">02 / THE GAP BETWEEN STRONG TECHNOLOGIES</div>
+        <div class="home-section-head"><div><p class="home-kicker">WHY RELINK?</p><h2>既存技術は強い。<br />課題は、その<em>間</em>にある。</h2></div><p>QRやNFCは物理世界の入口として、BLEは近距離接続として、Web APIやOpenAPIはサービス利用として、OAuthやWebAuthnは認証として優れています。WoT、OPC UA、GS1も、それぞれの領域で強い基盤です。</p></div>
+        <div class="gap-copy-grid"><p>問題は、これらが使えないことではありません。<strong>個別には使えるが、横断的に組み合わせにくい</strong>ことです。物理的な対象を見つけ、何者かを知り、何ができるかを理解し、現在の利用先へ到達するまでを、共通の方法で一気通貫に扱うのはまだ簡単ではありません。</p><p>そのため現状は、専用アプリ、専用SDK、独自UI、ベンダー固有の統合実装が、各技術の隙間を毎回埋める接着剤になっています。RELinkはそれらを置き換えるのではなく、発見・意味の理解・利用経路の提示を共通化する入口を作ります。</p></div>
+        <figure class="gap-figure"><img src="assets/relink-coverage-ja.svg" width="1200" height="690" alt="物理世界から情報サービスへ向かう経路で、QR・NFC、BLE、Web API・OpenAPI、OAuth・WebAuthn、WoT・OPC UA・GS1はそれぞれの領域に強く、RELinkがそれらをつなぐ薄い相互運用層であることを示す図" /><figcaption><span>HOW TO READ THIS</span> 既存技術が弱いのではありません。各技術は個別の問題に強く、RELinkはその間にある共通経路を扱います。</figcaption></figure>
+        <div class="gap-layer"><div><small>ABOVE THE LAYER</small><strong>Human · Web App · AI Agent · Robot · Business Logic</strong></div><div class="gap-layer__center"><small>THIN INTEROPERABILITY LAYER</small><strong>Physical Anchor → Resolver → AR-XML → Capability / Interface</strong></div><div><small>BELOW THE LAYER</small><strong>Physical Entity · Web Service · Legacy Device · Sensor · Passive Object</strong></div></div>
+        <p class="gap-summary">RELink は薄い相互運用層ですが、上下の境界面は広くなります。Web API、BLE、既存の認証技術の上に載りながら、現実世界の対象とソフトウェアの間に共通経路を作ります。専用アプリ依存をただちに無くすものではありませんが、その依存を減らせる可能性を提供します。</p>
+      </section>
+
       <section id="lab" class="home-section home-shell lab-section">
-        <div class="home-index light">02 / REFERENCE LAB</div>
+        <div class="home-index light">03 / REFERENCE LAB</div>
         <div class="home-section-head"><div><p class="home-kicker mint">PHYSICAL PATH</p><h2>概念だけでなく、<br /><em>Pico 2 W</em>までつなぐ。</h2></div><p>RELink Pico 2 W Reference Labは、既存のResolver、AR-XML、Web Runtime、Capability API、Gateway、物理デバイスを分離したまま接続する最小L1参照ラボです。</p></div>
         <div class="lab-proof"><article class="lab-proof__chain"><small>DISCOVERY / DESCRIPTION PLANE</small><div><span>Anchor</span><i>→</i><span>Resolver</span><i>→</i><span>AR-XML</span><i>→</i><strong>Web Runtime</strong></div><p><code>load()</code> はDescriptionの取得・解析・公開です。ロードしただけで機器は動きません。</p></article><article class="lab-proof__chain"><small>EXPLICIT EXECUTION PLANE</small><div><span>Human / Web App</span><i>→</i><span>RuntimeCapability.<wbr />invoke()</span><i>→</i><span>Capability API</span><i>→</i><strong>Pico 2 W</strong></div><p><code>invoke()</code> が明示的に要求されたときだけ、Capability APIを経由して物理Entityへ届きます。</p></article></div>
         <div class="lab-grid"><article><small>PHYSICAL OUTPUT</small><h3>Onboard LED</h3><p><code>light.setState</code> によるLED ON / OFFを対象にした実機経路。</p></article><article><small>PHYSICAL INPUT</small><h3>RP2350 temperature</h3><p><code>temperature.read</code> による内部温度の読み取り。正確な室温計測を主張するものではありません。</p></article><article><small>IMPLEMENTATION BOUNDARY</small><h3>Not L2 or production security</h3><p>Trust、認証、認可、完全準拠の証明ではありません。明示操作のL1参照経路を扱います。</p></article></div>
@@ -68,34 +77,34 @@
       </section>
 
       <section id="comparison" class="home-section home-shell comparison-section">
-        <div class="home-index">03 / EXISTING TECHNOLOGIES</div>
+        <div class="home-index">04 / EXISTING TECHNOLOGIES</div>
         <div class="home-section-head"><div><p class="home-kicker">COMPLEMENT, NOT REPLACEMENT</p><h2>既存技術を置き換えず、<br />物理Entityから<em>つなぐ</em>。</h2></div><p>RELinkの役割は、個々のtransport、API、Thing Description、商品識別子を統一することではありません。物理Entityを起点に、それらへの共通入口を提供することです。</p></div>
         <div class="comparison-table" role="region" aria-label="既存技術との位置付け" tabindex="0"><table><thead><tr><th>技術</th><th>主に解決するもの</th><th>RELinkとの関係</th></tr></thead><tbody><tr><th>QR / NFC URL</th><td>物理物からURLへの移動</td><td>URL先の意味やCapabilityは共通化しない</td></tr><tr><th>GS1</th><td>商品・物流対象の識別</td><td>operational Capabilityの発見が主目的ではない</td></tr><tr><th>WoT TD</th><td>Thingのinteraction記述</td><td>Physical Anchorから現在のTDへ到達する経路とは別の役割</td></tr><tr><th>OpenAPI</th><td>個別Web APIの操作・データ記述</td><td>Physical EntityやAnchorを扱わない</td></tr><tr><th>MQTT / OPC UA / BLE</th><td>device messaging・産業・近接通信</td><td>Capabilityを実行するInterfaceになり得る</td></tr><tr class="comparison-table__focus"><th>RELink</th><td>Physical EntityからCapabilityへの共通解決経路</td><td>実際のAPI・transportは既存技術を利用可能</td></tr></tbody></table></div>
         <p class="home-note"><span>EXAMPLE</span> 同じ <code>light.setState</code> Capabilityが、HTTPS POST、WoT TD、BLE、vendor-specific adapterという複数Interfaceを持てます。現在のWeb Runtimeの中心はHTTP(S)ですが、これはRuntime実装の境界であり、RELink仕様全体の制限ではありません。</p>
       </section>
 
       <section id="who" class="home-section home-shell audience-section">
-        <div class="home-index">04 / WHEN RELINK HELPS</div>
+        <div class="home-index">05 / WHEN RELINK HELPS</div>
         <div class="home-section-head"><div><p class="home-kicker">USE IT WHEN DISCOVERY MATTERS</p><h2>単純なAPIより、<br />Entityの<em>発見</em>が必要なとき。</h2></div><p>1台のdevice、1つのapplication、既知のAPIだけで完結するなら、REST APIを直接使う方が簡単です。RELinkはそこに余分な層を足すためのものではありません。</p></div>
         <div class="audience-grid"><article><small>APPLICATION / WEB</small><h3>事前知識のないEntityを扱う</h3><p>個別APIをあらかじめ組み込まず、Capabilityを見つけて利用したい開発者。</p></article><article><small>DEVICE / PRODUCT</small><h3>既存実装を捨てずに入口を足す</h3><p>API、SDK、WoT、BLE、MQTTなどを維持したまま、Physical AnchorとDiscoveryを追加したいメーカー。</p></article><article><small>SYSTEM INTEGRATION</small><h3>複数ベンダーを意味で統合する</h3><p>通信方式や製品差を越えて、EntityとCapability単位で接続したい人。</p></article><article><small>AGENT / AUTOMATION</small><h3>機械可読な操作候補を得る</h3><p>現実空間のEntityが何をできるかを取得し、Application側の方針で明示実行したい開発者。</p></article></div>
       </section>
 
       <section id="how" class="home-section home-shell how-section">
-        <div class="home-index light">05 / HOW IT WORKS</div>
+        <div class="home-index light">06 / HOW IT WORKS</div>
         <div class="home-section-head"><div><p class="home-kicker mint">SMALL, SEPARATE RESPONSIBILITIES</p><h2>発見と実行を、<br />同じものにしない。</h2></div><p>最小のWeb-native baselineは、Physical Anchor、UUID、Resolver、HTTPS、Entity Descriptionです。Resolverは小さく、Interfaceの呼び出しには関与しません。</p></div>
         <div class="how-flow"><div class="how-row"><span>01</span><div><small>STABLE PHYSICAL REFERENCE</small><strong>Physical Anchor / UUID</strong></div><p>QRやNFCなどに置ける、Entityへの安定した物理入口。</p></div><div class="how-row"><span>02</span><div><small>DNS-LIKE INDIRECTION</small><strong>Resolver → 303 See Other</strong></div><p>UUIDを現在のEntity Description Locationへ解決するだけ。AR-XMLを解析せず、Capabilityを実行しません。</p></div><div class="how-row"><span>03</span><div><small>ENTITY INTERFACE DESCRIPTION</small><strong>AR-XML</strong></div><p>Entity、Capability、Input Contract、Result Contract、Interfaceを機械可読に記述します。</p></div><div class="how-row"><span>04</span><div><small>RUNTIME + APPLICATION</small><strong>Discover, then explicitly invoke</strong></div><p>Web RuntimeはCapabilityを公開し、HumanまたはApplicationが明示要求した場合だけInterfaceを呼び出します。</p></div></div>
         <div class="principles-strip"><span>Entity ≠ Location</span><span>Capability ≠ Interface</span><span>Description ≠ Execution</span><span>Resolution ≠ Authentication</span></div>
       </section>
 
       <section class="home-section home-shell implementation-section">
-        <div class="home-index">06 / CURRENT BASELINE</div>
+        <div class="home-index">07 / CURRENT BASELINE</div>
         <div class="home-section-head"><div><p class="home-kicker">WHAT EXISTS TODAY</p><h2>仕様の全体ではなく、<br />現在の<em>実装範囲</em>を示す。</h2></div><p>Capabilityの概念とRuntimeが実際に対応しているInterfaceは同じ範囲ではありません。以下は公開リポジトリで確認できる現行baselineです。</p></div>
         <div class="status-grid"><article><span class="status-pill done">IMPLEMENTED</span><h3>Resolver Core 0.1 / L1</h3><p>UUIDからHTTPS Description LocationへのResolver経路とReference Resolver。</p></article><article><span class="status-pill done">IMPLEMENTED</span><h3>Web Runtime 0.1.0</h3><p>Browser向けのAR-XML Draft 4 load / parse / validate / explicit HTTP invocation。</p></article><article><span class="status-pill done">OPERATIONAL</span><h3>Testbed</h3><p>RuntimeとProtocol componentを独立して検証する決定論的なfixture・scenario環境。</p></article><article><span class="status-pill lab">REFERENCE LAB</span><h3>Pico 2 W L1 path</h3><p>Resolver-mediated loading、Capability API、LEDと内部温度の参照経路。</p></article><article><span class="status-pill draft">DRAFT / STABILIZING</span><h3>AR-XML Core 0.1 Draft 4</h3><p>Entity Interface Description Language。UI markupではありません。</p></article><article><span class="status-pill next">NEXT</span><h3>Trust / L2</h3><p>Resolution authenticity、Trust、より広い統合・物理検証はこれからです。</p></article></div>
         <p class="implementation-boundary"><span>BOUNDARY</span> Reference Labとrepresentative browser testsは、L2 security、production authorization、完全準拠、全環境での互換性を主張しません。</p>
       </section>
 
       <section id="projects" class="home-section home-shell projects-section">
-        <div class="home-index">07 / SPECIFICATIONS &amp; IMPLEMENTATIONS</div>
+        <div class="home-index">08 / SPECIFICATIONS &amp; IMPLEMENTATIONS</div>
         <div class="home-section-head"><div><p class="home-kicker">READ THE ACTUAL WORK</p><h2>概念から、<br />公開実装と仕様へ。</h2></div><p>RELinkは実験的なアーキテクチャです。仕様、Runtime、Resolver、Testbed、Reference Labを別々に公開し、責務と検証範囲を追えるようにしています。</p></div>
         <div class="project-links"><a href="https://github.com/ranmaru50/relink-reference-lab" rel="noreferrer"><span>01 / PHYSICAL REFERENCE</span><strong>RELink Pico 2 W Reference Lab</strong><b>↗</b></a><a href="https://github.com/ranmaru50/relink-resolver" rel="noreferrer"><span>02 / RESOLUTION</span><strong>RELink Resolver Core &amp; Reference Resolver</strong><b>↗</b></a><a href="https://github.com/ranmaru50/relink-web-runtime" rel="noreferrer"><span>03 / BROWSER RUNTIME</span><strong>RELink Web Runtime 0.1.0</strong><b>↗</b></a><a href="https://github.com/ranmaru50/relink-testbed" rel="noreferrer"><span>04 / VERIFICATION</span><strong>RELink Testbed</strong><b>↗</b></a><a href="https://github.com/ranmaru50/relink-web-runtime/blob/main/docs/specs/arxml-core-0.1-draft4.md" rel="noreferrer"><span>05 / SPECIFICATION</span><strong>AR-XML Core 0.1 Draft 4</strong><b>↗</b></a><a href="smart-home.html"><span>06 / TECHNICAL GUIDE</span><strong>照明と室温で学ぶRELink</strong><b>↗</b></a></div>
       </section>
